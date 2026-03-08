@@ -12,7 +12,7 @@ const COLORS = {
   grayDark: "#333333",
 };
 
-const SECTIONS = ["home", "coletivo", "espetaculo", "premios", "imprensa", "contato"];
+const SECTIONS = ["home", "coletivo", "espetaculo", "premios", "imprensa", "blog", "contato"];
 
 // Adinkra-inspired decorative SVG
 const AdinkraSymbol = ({ size = 40, color = COLORS.gold, style = {} }) => (
@@ -56,7 +56,7 @@ function Nav({ active, onNav }) {
     window.addEventListener("scroll", h);
     return () => window.removeEventListener("scroll", h);
   }, []);
-  const labels = { home: "Home", coletivo: "O Coletivo", espetaculo: "Gestação de Cam", premios: "Prêmios", imprensa: "Imprensa", contato: "Contato" };
+  const labels = { home: "Home", coletivo: "O Coletivo", espetaculo: "Gestação de Cam", premios: "Prêmios", imprensa: "Imprensa", blog: "Blog", contato: "Contato" };
   return (
     <nav style={{
       position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
@@ -699,6 +699,159 @@ function Imprensa() {
   );
 }
 
+// BLOG Section
+const BLOG_POSTS = [
+  {
+    id: 1,
+    category: "Reflexão",
+    tag: "Dramaturgia",
+    title: "A Memória Como Resistência: Reflexões sobre Gestação de Cam",
+    excerpt: "Em Gestação de Cam, a memória não é apenas recordação — é ato político. Três mulheres que despertam sem nome carregam no corpo a história de todas as que vieram antes. Este texto explora como a dramaturgia converte o esquecimento imposto em semente de recriação.",
+    author: "Camila Zenzele Pinho",
+    date: "Fevereiro 2025",
+    readTime: "6 min",
+  },
+  {
+    id: 2,
+    category: "Pensamento",
+    tag: "Teoria",
+    title: "Afroperspectivismo no Teatro: O que é e por que importa",
+    excerpt: "O termo afroperspectividade surge da filosofia de Renato Noguera e propõe um giro epistêmico: colocar as perspectivas africanas e afro-diaspóricas no centro, não como exotismo, mas como método. Entenda como o Coletivo Gestação aplica esse conceito à cena.",
+    author: "Camila Zenzele Pinho",
+    date: "Outubro 2024",
+    readTime: "8 min",
+  },
+  {
+    id: 3,
+    category: "Bastidores",
+    tag: "Festival",
+    title: "Festival Satyrianas 2023: Nossa Experiência em São Paulo",
+    excerpt: "Levar Gestação de Cam a um dos maiores festivais universitários de teatro do Brasil foi uma prova de fé coletiva. Aqui contamos os desafios da viagem, o encontro com outros grupos negros e o que voltou diferente em cada uma de nós.",
+    author: "Larissa Fernanda de Andrade",
+    date: "Novembro 2023",
+    readTime: "5 min",
+  },
+  {
+    id: 4,
+    category: "Ancestralidade",
+    tag: "Pesquisa",
+    title: "Cam e a Mitologia: A Maldição Reinterpretada",
+    excerpt: "A figura bíblica de Cam foi usada por séculos para justificar a escravidão. Nossa dramaturgia se recusa a aceitar essa narrativa. Aqui detalhamos o processo de reescrita mítica que dá origem ao espetáculo.",
+    author: "Camila Zenzele Pinho",
+    date: "Março 2023",
+    readTime: "10 min",
+  },
+  {
+    id: 5,
+    category: "Processo Criativo",
+    tag: "Música",
+    title: "Música Como Medicina: A Trilha Sonora de Nega Lu",
+    excerpt: "As canções compostas por Nega Lu para Gestação de Cam não são ornamento — são estrutura dramatúrgica. Cada tema musical corresponde a um estágio da jornada das personagens e carrega em si uma intenção de cura.",
+    author: "Sara Alves Timótheo",
+    date: "Janeiro 2023",
+    readTime: "7 min",
+  },
+];
+
+function BlogCard({ post, featured = false, inView, delay = 0 }) {
+  const [hovered, setHovered] = useState(false);
+  return (
+    <div
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        background: COLORS.bg,
+        border: `1px solid ${hovered ? COLORS.gold + "55" : COLORS.grayDark}`,
+        padding: featured ? "clamp(28px, 3vw, 44px)" : 28,
+        display: "flex", flexDirection: "column", gap: 16,
+        cursor: "pointer", transition: "border-color 0.3s, transform 0.3s",
+        transform: hovered ? "translateY(-3px)" : "translateY(0)",
+        opacity: inView ? 1 : 0,
+        transitionDelay: `${delay}s`,
+        transitionProperty: "opacity, transform, border-color",
+        transitionDuration: "0.6s, 0.3s, 0.3s",
+      }}
+    >
+      {/* Tag */}
+      <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+        <span style={{
+          fontFamily: "'DM Sans', sans-serif", fontSize: 10, letterSpacing: 2,
+          textTransform: "uppercase", color: COLORS.gold,
+        }}>{post.category}</span>
+        <span style={{ width: 20, height: 1, background: COLORS.grayDark }} />
+        <span style={{
+          fontFamily: "'DM Sans', sans-serif", fontSize: 10, letterSpacing: 1,
+          textTransform: "uppercase", color: COLORS.gray,
+        }}>{post.tag}</span>
+      </div>
+      {/* Title */}
+      <h3 style={{
+        fontFamily: "'Playfair Display', Georgia, serif",
+        fontSize: featured ? "clamp(22px, 2.5vw, 28px)" : "clamp(16px, 2vw, 19px)",
+        color: COLORS.cream, fontWeight: 700, lineHeight: 1.3, margin: 0,
+      }}>
+        {post.title}
+      </h3>
+      {/* Excerpt */}
+      <p style={{
+        fontFamily: "'DM Sans', sans-serif",
+        fontSize: featured ? 15 : 13,
+        color: COLORS.gray, lineHeight: 1.75, margin: 0, flexGrow: 1,
+      }}>
+        {post.excerpt}
+      </p>
+      {/* Footer */}
+      <div style={{
+        display: "flex", alignItems: "center", justifyContent: "space-between",
+        paddingTop: 16, borderTop: `1px solid ${COLORS.grayDark}`,
+        flexWrap: "wrap", gap: 8,
+      }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
+          <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: COLORS.cream }}>{post.author}</span>
+          <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 11, color: COLORS.gray }}>{post.date} · {post.readTime} de leitura</span>
+        </div>
+        <span style={{
+          fontFamily: "'DM Sans', sans-serif", fontSize: 12, letterSpacing: 1.5,
+          textTransform: "uppercase", color: COLORS.gold,
+          display: "flex", alignItems: "center", gap: 6,
+          opacity: hovered ? 1 : 0.6, transition: "opacity 0.3s",
+        }}>
+          Ler mais <span style={{ fontSize: 14 }}>→</span>
+        </span>
+      </div>
+    </div>
+  );
+}
+
+function Blog() {
+  const [ref, inView] = useInView();
+  const [featured, ...rest] = BLOG_POSTS;
+  return (
+    <section id="blog" style={{
+      padding: "clamp(80px, 10vw, 120px) clamp(20px, 4vw, 60px)",
+      background: COLORS.bgAlt,
+    }}>
+      <div style={{ maxWidth: 1000, margin: "0 auto" }}>
+        <SectionTitle title="Blog" subtitle="Textos & Reflexões" />
+        <div ref={ref} style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+          {/* Featured post */}
+          <BlogCard post={featured} featured inView={inView} delay={0.1} />
+          {/* Grid of remaining posts */}
+          <div style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
+            gap: 20,
+          }}>
+            {rest.map((post, i) => (
+              <BlogCard key={post.id} post={post} inView={inView} delay={0.2 + i * 0.1} />
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 // CONTATO Section
 function Contato() {
   const [ref, inView] = useInView();
@@ -831,6 +984,7 @@ export default function App() {
       <Espetaculo />
       <Premios />
       <Imprensa />
+      <Blog />
       <Contato />
       <Footer />
     </div>
