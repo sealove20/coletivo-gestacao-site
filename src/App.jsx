@@ -710,6 +710,12 @@ const BLOG_POSTS = [
     author: "Camila Zenzele Pinho",
     date: "Fevereiro 2025",
     readTime: "6 min",
+    content: [
+      "Quando três mulheres despertam sem saber seus nomes, a primeira reação do público costuma ser a estranheza. Mas há algo de profundamente familiar nesse estado — porque o esquecimento forçado é uma das ferramentas mais antigas do apagamento cultural. Em Gestação de Cam, esse esquecimento não é um ponto de partida dramático qualquer: é a síntese de séculos de violência epistêmica contra povos negros.",
+      "A dramaturgia que construímos coletivamente parte de uma pergunta simples: o que resta quando tiram de você o seu nome? A resposta que encontramos no processo de criação foi surpreendente — resta o corpo. Resta o ritmo. Resta a voz que, mesmo sem saber o que diz, sabe como cantar. A memória corporal, aquela que a colonização não conseguiu apagar completamente, é o fio condutor de toda a peça.",
+      "Cada cena foi construída a partir de práticas de pesquisa em afroperspectividades, teoria que propõe colocar as epistemologias africanas e afro-diaspóricas no centro da produção de conhecimento. Isso significa que não adaptamos mitos europeus para 'incluir' personagens negras — criamos a partir de dentro, com as ferramentas que nossa própria tradição nos oferece: o canto como invocação, o corpo como arquivo, a floresta como território sagrado.",
+      "A resistência, aqui, não é grito. É germinação. As personagens não lutam contra uma força externa visível — elas buscam dentro de si aquilo que sempre esteve lá. E quando encontram, não apenas recuperam um nome: constroem um futuro diferente para a criança que nasce entre elas. Esse movimento — do esquecimento para a memória, da maldição para a proteção — é, em essência, o que entendemos por resistência cultural.",
+    ],
   },
   {
     id: 2,
@@ -720,6 +726,12 @@ const BLOG_POSTS = [
     author: "Camila Zenzele Pinho",
     date: "Outubro 2024",
     readTime: "8 min",
+    content: [
+      "Quando falamos em afroperspectividade, não estamos falando de um estilo estético ou de uma temática específica. Estamos falando de um método — uma forma de produzir conhecimento que parte de referenciais filosóficos africanos e afro-diaspóricos como centro, e não como margem ou complemento. O conceito foi desenvolvido pelo filósofo Renato Noguera e tem se mostrado uma ferramenta poderosa para repensar não apenas o que fazemos, mas como fazemos.",
+      "No teatro, isso se traduz em algumas perguntas fundamentais: Quem fala? De onde fala? Para quem? Com quais ferramentas simbólicas? Um teatro afroperspectivista não é simplesmente um teatro 'sobre negros' — é um teatro que opera a partir de lógicas cosmológicas, filosóficas e estéticas nascidas em terras africanas e reelaboradas na diáspora. A diferença é enorme.",
+      "No Coletivo Gestação, essa perspectiva se manifesta na estrutura dramatúrgica: o tempo circular em vez de linear, a presença de divindades não como metáfora mas como agentes da narrativa, o corpo coletivo que pulsa junto antes de se individualizar, a música como dramaturgia e não como ilustração. Não adaptamos o modelo do teatro ocidental para 'incluir' elementos afro — partimos de outro lugar.",
+      "Isso não significa exclusão. Significa que quando o espetáculo chega a um palco universitário em São Paulo ou a um festival em Rondonópolis, ele não pede licença para existir nem traduz a si mesmo para uma suposta 'linguagem universal'. Ele propõe ao público que se mova em direção a ele — e a resposta, em todos os contextos, tem sido de encontro genuíno.",
+    ],
   },
   {
     id: 3,
@@ -730,6 +742,12 @@ const BLOG_POSTS = [
     author: "Larissa Fernanda de Andrade",
     date: "Novembro 2023",
     readTime: "5 min",
+    content: [
+      "A convocatória chegou em um momento em que o coletivo estava em pleno processo de revisão do espetáculo. Inscrever Gestação de Cam no Festival Satyrianas parecia, ao mesmo tempo, um salto necessário e um risco enorme. Éramos um grupo de Rondonópolis, cidade do interior de Mato Grosso, indo ao encontro de grupos teatrais de todo o Brasil — muitos deles com anos de trajetória em grandes centros.",
+      "A viagem de ônibus foi longa. Dividimos os custos, arrumamos mala com figurino e adereços, e partimos com a certeza de que o espetáculo carregava algo verdadeiro. A recepção no festival nos surpreendeu desde o primeiro dia: outros grupos negros nos procuraram para conversar sobre processo, sobre as escolhas estéticas, sobre afroperspectividade. Havia um reconhecimento mútuo que ultrapassava o elogio.",
+      "A apresentação aconteceu em um espaço pequeno, com capacidade para cerca de oitenta pessoas. Estava lotado. O silêncio durante o espetáculo foi diferente dos silêncios que conhecíamos — mais denso, mais atento. E o encontro depois, com a plateia ainda presente no espaço, foi onde a peça de fato se completou.",
+      "O que voltou diferente em cada uma de nós é difícil de nomear com precisão. Talvez seja a certeza de que o que fazemos não é local no sentido limitante da palavra — é local no sentido de que nasce de um lugar específico, de uma experiência específica, e é exatamente por isso que ressoa em qualquer outro lugar.",
+    ],
   },
   {
     id: 4,
@@ -740,6 +758,12 @@ const BLOG_POSTS = [
     author: "Camila Zenzele Pinho",
     date: "Março 2023",
     readTime: "10 min",
+    content: [
+      "A chamada 'Maldição de Cam' é um dos exemplos mais devastadores de como a interpretação religiosa pode ser instrumentalizada para fins políticos. A passagem do Gênesis em que Noé amaldiçoa Canaã, filho de Cam, foi reinterpretada ao longo dos séculos como justificativa teológica para a escravidão dos povos africanos. Cam teria sido o 'pai dos negros' e, portanto, toda a sua descendência estaria condenada à servidão.",
+      "Quando me deparei com essa interpretação durante minha pesquisa de mestrado, a reação foi imediata: recusar. Não como negação ingênua, mas como ato dramaturgo consciente. Se essa narrativa foi construída, pode ser desconstruída. Se foi usada para apagar, pode ser reescrita para iluminar.",
+      "O processo de pesquisa envolveu mergulhar em cosmologias africanas, em especial nas tradições yorubá e banto, buscando figuras femininas de proteção e memória. Encontramos nas yabás — orixás femininos — uma galeria de mulheres que carregam em si contradições, poderes e histórias muito mais ricas do que qualquer maldição bíblica poderia conter. Cam, em nossa dramaturgia, não é amaldiçoada: é uma mulher que teve seu nome roubado e que parte em busca dele.",
+      "A reescrita não apaga o peso histórico da maldição original — ela o carrega e o transforma. As três mulheres que compartilham o nome Cam não fogem da ferida: elas a atravessam. E ao atravessá-la, encontram não apenas seus nomes, mas a capacidade de nomear a criança que nasce — de garantir que ela não herde o esquecimento, mas a memória.",
+    ],
   },
   {
     id: 5,
@@ -750,13 +774,156 @@ const BLOG_POSTS = [
     author: "Sara Alves Timótheo",
     date: "Janeiro 2023",
     readTime: "7 min",
+    content: [
+      "Antes de existirem palavras para descrever o que queríamos fazer em cena, existia som. Nas primeiras sessões de criação do espetáculo, muito antes de termos um roteiro definido, Nega Lu já trazia melodias que pareciam saber o que a peça iria dizer. Havia algo de oracular nesse processo — a música chegava antes da cena e a cena nascia a partir da música.",
+      "Nega Lu trabalha a partir de uma prática que ela mesma chama de 'composição medicinal': cada canção é criada com uma intenção específica de cura ou de abertura. Para Gestação de Cam, ela compôs temas que correspondem aos estados emocionais e espirituais das personagens: há uma canção para o estado de esquecimento, quase um lamento sem palavras; há um tema para o momento em que as mulheres se reconhecem entre si; e há o canto final, que é também uma oração.",
+      "A percussão de Moisés Ferreira se integra a esse universo não como acompanhamento rítmico, mas como voz própria. Em alguns momentos do espetáculo, o tambor dialoga diretamente com as atrizes — responde, pergunta, confirma. Quem assiste sem saber pode pensar que isso é improvisação; na verdade, é uma partitura muito precisa, desenvolvida ao longo de meses de ensaio.",
+      "O que nos surpreende, espetáculo após espetáculo, é ver como a plateia responde à música antes de processar o texto. Crianças que nunca viram teatro, adultos que raramente frequentam espetáculos — todos entram em sincronia com o ritmo antes de entender a história. Isso confirma o que sabemos há muito tempo: o corpo entende o que a mente ainda está tentando traduzir.",
+    ],
   },
 ];
 
-function BlogCard({ post, featured = false, inView, delay = 0 }) {
+function BlogModal({ post, onClose }) {
+  useEffect(() => {
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const onKey = (e) => { if (e.key === "Escape") onClose(); };
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = prev;
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [onClose]);
+
+  return (
+    <div
+      onClick={onClose}
+      style={{
+        position: "fixed", inset: 0, zIndex: 200,
+        background: "rgba(0,0,0,0.85)", backdropFilter: "blur(6px)",
+        display: "flex", alignItems: "flex-start", justifyContent: "center",
+        padding: "clamp(16px, 4vw, 40px)",
+        overflowY: "auto",
+        animation: "fadeIn 0.25s ease",
+      }}
+    >
+      <div
+        onClick={(e) => e.stopPropagation()}
+        style={{
+          background: COLORS.bg, border: `1px solid ${COLORS.grayDark}`,
+          maxWidth: 720, width: "100%",
+          padding: "clamp(32px, 5vw, 60px)",
+          position: "relative",
+          animation: "slideUp 0.3s cubic-bezier(0.16,1,0.3,1)",
+          marginTop: 20, marginBottom: 20,
+        }}
+      >
+        {/* Close button */}
+        <button
+          onClick={onClose}
+          style={{
+            position: "absolute", top: 20, right: 20,
+            background: "none", border: `1px solid ${COLORS.grayDark}`,
+            color: COLORS.gray, cursor: "pointer",
+            width: 36, height: 36, display: "flex",
+            alignItems: "center", justifyContent: "center",
+            fontFamily: "'DM Sans', sans-serif", fontSize: 18,
+            transition: "all 0.2s",
+          }}
+          onMouseEnter={e => { e.currentTarget.style.borderColor = COLORS.gold; e.currentTarget.style.color = COLORS.gold; }}
+          onMouseLeave={e => { e.currentTarget.style.borderColor = COLORS.grayDark; e.currentTarget.style.color = COLORS.gray; }}
+        >
+          ×
+        </button>
+
+        {/* Meta */}
+        <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 24 }}>
+          <span style={{
+            fontFamily: "'DM Sans', sans-serif", fontSize: 10, letterSpacing: 2,
+            textTransform: "uppercase", color: COLORS.gold,
+          }}>{post.category}</span>
+          <span style={{ width: 20, height: 1, background: COLORS.grayDark }} />
+          <span style={{
+            fontFamily: "'DM Sans', sans-serif", fontSize: 10, letterSpacing: 1,
+            textTransform: "uppercase", color: COLORS.gray,
+          }}>{post.tag}</span>
+        </div>
+
+        {/* Title */}
+        <h2 style={{
+          fontFamily: "'Playfair Display', Georgia, serif",
+          fontSize: "clamp(24px, 4vw, 36px)",
+          color: COLORS.cream, fontWeight: 700, lineHeight: 1.25,
+          margin: "0 0 24px",
+        }}>
+          {post.title}
+        </h2>
+
+        {/* Author / date */}
+        <div style={{
+          display: "flex", alignItems: "center", gap: 16,
+          paddingBottom: 28, borderBottom: `1px solid ${COLORS.grayDark}`,
+          marginBottom: 32, flexWrap: "wrap",
+        }}>
+          <div style={{
+            width: 36, height: 36, borderRadius: "50%",
+            background: `linear-gradient(135deg, ${COLORS.gold}44, ${COLORS.goldDark}22)`,
+            display: "flex", alignItems: "center", justifyContent: "center",
+            fontFamily: "'Playfair Display', serif", fontSize: 15, color: COLORS.gold, fontWeight: 700,
+          }}>
+            {post.author.charAt(0)}
+          </div>
+          <div>
+            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, color: COLORS.cream, margin: 0 }}>{post.author}</p>
+            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 12, color: COLORS.gray, margin: 0 }}>{post.date} · {post.readTime} de leitura</p>
+          </div>
+        </div>
+
+        {/* Body */}
+        <div style={{ display: "flex", flexDirection: "column", gap: 22 }}>
+          {post.content.map((paragraph, i) => (
+            <p key={i} style={{
+              fontFamily: i === 0 ? "'Playfair Display', Georgia, serif" : "'DM Sans', sans-serif",
+              fontSize: i === 0 ? "clamp(16px, 2vw, 19px)" : 15,
+              color: i === 0 ? COLORS.cream : COLORS.gray,
+              lineHeight: 1.85, margin: 0,
+              fontStyle: i === 0 ? "italic" : "normal",
+            }}>
+              {paragraph}
+            </p>
+          ))}
+        </div>
+
+        {/* Divider + close CTA */}
+        <div style={{
+          marginTop: 40, paddingTop: 28,
+          borderTop: `1px solid ${COLORS.grayDark}`,
+          display: "flex", justifyContent: "flex-end",
+        }}>
+          <button
+            onClick={onClose}
+            style={{
+              fontFamily: "'DM Sans', sans-serif", fontSize: 12, letterSpacing: 2,
+              textTransform: "uppercase", padding: "12px 28px",
+              background: "transparent", border: `1px solid ${COLORS.grayDark}`,
+              color: COLORS.gray, cursor: "pointer", transition: "all 0.3s",
+            }}
+            onMouseEnter={e => { e.currentTarget.style.borderColor = COLORS.gold; e.currentTarget.style.color = COLORS.gold; }}
+            onMouseLeave={e => { e.currentTarget.style.borderColor = COLORS.grayDark; e.currentTarget.style.color = COLORS.gray; }}
+          >
+            ← Voltar ao Blog
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function BlogCard({ post, featured = false, inView, delay = 0, onClick }) {
   const [hovered, setHovered] = useState(false);
   return (
     <div
+      onClick={onClick}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
@@ -825,6 +992,7 @@ function BlogCard({ post, featured = false, inView, delay = 0 }) {
 
 function Blog() {
   const [ref, inView] = useInView();
+  const [selectedPost, setSelectedPost] = useState(null);
   const [featured, ...rest] = BLOG_POSTS;
   return (
     <section id="blog" style={{
@@ -834,20 +1002,19 @@ function Blog() {
       <div style={{ maxWidth: 1000, margin: "0 auto" }}>
         <SectionTitle title="Blog" subtitle="Textos & Reflexões" />
         <div ref={ref} style={{ display: "flex", flexDirection: "column", gap: 20 }}>
-          {/* Featured post */}
-          <BlogCard post={featured} featured inView={inView} delay={0.1} />
-          {/* Grid of remaining posts */}
+          <BlogCard post={featured} featured inView={inView} delay={0.1} onClick={() => setSelectedPost(featured)} />
           <div style={{
             display: "grid",
             gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
             gap: 20,
           }}>
             {rest.map((post, i) => (
-              <BlogCard key={post.id} post={post} inView={inView} delay={0.2 + i * 0.1} />
+              <BlogCard key={post.id} post={post} inView={inView} delay={0.2 + i * 0.1} onClick={() => setSelectedPost(post)} />
             ))}
           </div>
         </div>
       </div>
+      {selectedPost && <BlogModal post={selectedPost} onClose={() => setSelectedPost(null)} />}
     </section>
   );
 }
@@ -977,6 +1144,8 @@ export default function App() {
         }
         a:hover { opacity: 0.85; }
         button:hover { opacity: 0.9; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
       `}</style>
       <Nav active={active} onNav={scrollTo} />
       <Home onNav={scrollTo} />
