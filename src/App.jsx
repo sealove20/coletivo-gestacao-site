@@ -12,7 +12,23 @@ const COLORS = {
   grayDark: "#333333",
 };
 
-const SECTIONS = ["home", "coletivo", "espetaculo", "imprensa", "blog", "contato"];
+const COLORS_TERE = {
+  bg: "#1C2A0A",
+  bgAlt: "#172208",
+  bgCard: "#243010",
+  olive: "#3D5018",
+  yellow: "#E8C419",
+  golden: "#D4A815",
+  goldenLight: "#E8A020",
+  peach: "#E8A87C",
+  red: "#8B1A1A",
+  cream: "#F5EDD0",
+  white: "#FAFAFA",
+  gray: "#8A8A6A",
+  grayDark: "#2E3D12",
+};
+
+const SECTIONS = ["home", "coletivo", "imprensa", "blog", "contato"];
 
 // Adinkra-inspired decorative SVG
 const AdinkraSymbol = ({ size = 40, color = COLORS.gold, style = {} }) => (
@@ -33,6 +49,32 @@ const StarDecor = ({ size = 16, color = COLORS.gold, style = {} }) => (
   </svg>
 );
 
+const TereArrow = ({ color = COLORS_TERE.yellow, width = 48 }) => (
+  <svg width={width} height={width * 0.6} viewBox="0 0 80 48" fill={color}>
+    <polygon points="0,13 46,13 46,0 80,24 46,48 46,35 0,35" />
+  </svg>
+);
+
+const TereLogoSVG = ({ size = 160, spin = false }) => (
+  <svg width={size} height={size} viewBox="0 0 200 200">
+    {/* Outer amber circle */}
+    <circle cx="100" cy="100" r="96" fill={COLORS_TERE.goldenLight} />
+    {/* Dark starburst ring */}
+    <polygon
+      points="100,18 115,44 141,29 141,59 171,59 156,85 182,100 156,115 171,141 141,141 141,171 115,156 100,182 85,156 59,171 59,141 29,141 44,115 18,100 44,85 29,59 59,59 59,29 85,44"
+      fill={COLORS_TERE.olive}
+      style={spin ? { transformOrigin: "100px 100px", animation: "logoSpin 60s linear infinite" } : {}}
+    />
+    {/* Inner dark circle */}
+    <circle cx="100" cy="100" r="44" fill={COLORS_TERE.bgAlt} />
+    {/* Red center star */}
+    <polygon
+      points="100,68 108,90 130,90 112,104 119,126 100,113 81,126 88,104 70,90 92,90"
+      fill={COLORS_TERE.red}
+    />
+  </svg>
+);
+
 // Intersection Observer hook for scroll animations
 function useInView(threshold = 0.15) {
   const ref = useRef(null);
@@ -48,15 +90,26 @@ function useInView(threshold = 0.15) {
 }
 
 // Navigation
-function Nav({ active, onNav }) {
+function Nav({ active, onNav, onNavigate, currentPage }) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [mobileShowsOpen, setMobileShowsOpen] = useState(false);
   useEffect(() => {
     const h = () => setScrolled(window.scrollY > 60);
     window.addEventListener("scroll", h);
     return () => window.removeEventListener("scroll", h);
   }, []);
-  const labels = { home: "Home", coletivo: "O Coletivo", espetaculo: "Gestação de Cam", imprensa: "Imprensa", blog: "Blog", contato: "Contato" };
+  const labels = { home: "Home", coletivo: "O Coletivo", imprensa: "Imprensa", blog: "Blog", contato: "Contato" };
+  const isEspetaculosActive = currentPage === "rainha-tere" || currentPage === "gestacao-de-cam";
+  const navBtnStyle = (s) => ({
+    background: "none", border: "none", cursor: "pointer",
+    fontFamily: "'DM Sans', sans-serif", fontSize: 13, letterSpacing: 1.5,
+    textTransform: "uppercase",
+    color: active === s ? COLORS.gold : COLORS.gray,
+    borderBottom: active === s ? `2px solid ${COLORS.gold}` : "2px solid transparent",
+    paddingBottom: 4, transition: "all 0.3s",
+  });
   return (
     <nav style={{
       position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
@@ -73,20 +126,63 @@ function Nav({ active, onNav }) {
           </span>
         </div>
         {/* Desktop menu */}
-        <div style={{ display: "flex", gap: 28, alignItems: "center" }}
-          className="desktop-nav">
-          {SECTIONS.map(s => (
-            <button key={s} onClick={() => onNav(s)} style={{
-              background: "none", border: "none", cursor: "pointer",
-              fontFamily: "'DM Sans', sans-serif", fontSize: 13, letterSpacing: 1.5,
-              textTransform: "uppercase",
-              color: active === s ? COLORS.gold : COLORS.gray,
-              borderBottom: active === s ? `2px solid ${COLORS.gold}` : "2px solid transparent",
-              paddingBottom: 4, transition: "all 0.3s",
+        <div style={{ display: "flex", gap: 28, alignItems: "center" }} className="desktop-nav">
+          <button style={navBtnStyle("home")} onClick={() => onNav("home")}>Home</button>
+          <button style={navBtnStyle("coletivo")} onClick={() => onNav("coletivo")}>O Coletivo</button>
+          {/* Espetáculos dropdown */}
+          <div style={{ position: "relative" }}
+            onMouseEnter={() => setDropdownOpen(true)}
+            onMouseLeave={() => setDropdownOpen(false)}>
+            <button style={{
+              ...navBtnStyle("_espetaculos"),
+              color: isEspetaculosActive ? COLORS.gold : COLORS.gray,
+              borderBottom: isEspetaculosActive ? `2px solid ${COLORS.gold}` : "2px solid transparent",
+              display: "flex", alignItems: "center", gap: 5,
             }}>
-              {labels[s]}
+              Espetáculos
+              <span style={{
+                fontSize: 8, display: "inline-block",
+                transform: dropdownOpen ? "rotate(180deg)" : "none",
+                transition: "transform 0.2s",
+              }}>▼</span>
             </button>
-          ))}
+            {dropdownOpen && (
+              <div style={{
+                position: "absolute", top: "calc(100% + 12px)", left: "50%",
+                transform: "translateX(-50%)",
+                background: "rgba(10,10,10,0.98)",
+                border: `1px solid ${COLORS.grayDark}`,
+                backdropFilter: "blur(12px)",
+                minWidth: 220, padding: "8px 0",
+                zIndex: 200, animation: "fadeIn 0.15s ease",
+              }}>
+                <button onClick={() => { onNavigate("gestacao-de-cam"); setDropdownOpen(false); }} style={{
+                  width: "100%", background: "none", border: "none", cursor: "pointer",
+                  textAlign: "left", padding: "12px 20px",
+                  display: "flex", flexDirection: "column", gap: 3,
+                  fontFamily: "'DM Sans', sans-serif",
+                  color: currentPage === "gestacao-de-cam" ? COLORS.gold : COLORS.cream,
+                }}>
+                  <span style={{ fontSize: 13, letterSpacing: 0.5 }}>Gestação de Cam</span>
+                  <span style={{ fontSize: 10, color: COLORS.gray, letterSpacing: 1, textTransform: "uppercase" }}>Teatro · 2021</span>
+                </button>
+                <div style={{ height: 1, background: COLORS.grayDark, margin: "4px 12px" }} />
+                <button onClick={() => { onNavigate("rainha-tere"); setDropdownOpen(false); }} style={{
+                  width: "100%", background: "none", border: "none", cursor: "pointer",
+                  textAlign: "left", padding: "12px 20px",
+                  display: "flex", flexDirection: "column", gap: 3,
+                  fontFamily: "'DM Sans', sans-serif",
+                  color: currentPage === "rainha-tere" ? COLORS_TERE.yellow : COLORS.cream,
+                }}>
+                  <span style={{ fontSize: 13, letterSpacing: 0.5 }}>Festival Rainha Terê</span>
+                  <span style={{ fontSize: 10, color: COLORS.gray, letterSpacing: 1, textTransform: "uppercase" }}>Festival · 2024–2025</span>
+                </button>
+              </div>
+            )}
+          </div>
+          <button style={navBtnStyle("imprensa")} onClick={() => onNav("imprensa")}>Imprensa</button>
+          <button style={navBtnStyle("blog")} onClick={() => onNav("blog")}>Blog</button>
+          <button style={navBtnStyle("contato")} onClick={() => onNav("contato")}>Contato</button>
         </div>
         {/* Mobile hamburger */}
         <button onClick={() => setMenuOpen(!menuOpen)} style={{
@@ -103,17 +199,47 @@ function Nav({ active, onNav }) {
         <div style={{
           position: "absolute", top: 70, left: 0, right: 0, background: "rgba(10,10,10,0.98)",
           padding: "20px 30px", display: "flex", flexDirection: "column", gap: 16,
-          borderBottom: `1px solid ${COLORS.grayDark}`,
+          borderBottom: `1px solid ${COLORS.grayDark}`, zIndex: 150,
         }}>
-          {SECTIONS.map(s => (
+          {["home", "coletivo"].map(s => (
             <button key={s} onClick={() => { onNav(s); setMenuOpen(false); }} style={{
               background: "none", border: "none", cursor: "pointer", textAlign: "left",
               fontFamily: "'DM Sans', sans-serif", fontSize: 14, letterSpacing: 1.5,
+              textTransform: "uppercase", color: active === s ? COLORS.gold : COLORS.cream,
+            }}>{labels[s]}</button>
+          ))}
+          {/* Mobile Espetáculos accordion */}
+          <div>
+            <button onClick={() => setMobileShowsOpen(!mobileShowsOpen)} style={{
+              background: "none", border: "none", cursor: "pointer", textAlign: "left", width: "100%",
+              fontFamily: "'DM Sans', sans-serif", fontSize: 14, letterSpacing: 1.5,
               textTransform: "uppercase",
-              color: active === s ? COLORS.gold : COLORS.cream,
+              color: isEspetaculosActive ? COLORS.gold : COLORS.cream,
+              display: "flex", alignItems: "center", gap: 8,
             }}>
-              {labels[s]}
+              Espetáculos <span style={{ fontSize: 10 }}>{mobileShowsOpen ? "▲" : "▼"}</span>
             </button>
+            {mobileShowsOpen && (
+              <div style={{ paddingLeft: 20, display: "flex", flexDirection: "column", gap: 12, marginTop: 10 }}>
+                <button onClick={() => { onNavigate("gestacao-de-cam"); setMenuOpen(false); setMobileShowsOpen(false); }} style={{
+                  background: "none", border: "none", cursor: "pointer", textAlign: "left",
+                  fontFamily: "'DM Sans', sans-serif", fontSize: 13,
+                  color: currentPage === "gestacao-de-cam" ? COLORS.gold : COLORS.gray,
+                }}>→ Gestação de Cam</button>
+                <button onClick={() => { onNavigate("rainha-tere"); setMenuOpen(false); setMobileShowsOpen(false); }} style={{
+                  background: "none", border: "none", cursor: "pointer", textAlign: "left",
+                  fontFamily: "'DM Sans', sans-serif", fontSize: 13,
+                  color: currentPage === "rainha-tere" ? COLORS_TERE.yellow : COLORS.gray,
+                }}>→ Festival Rainha Terê</button>
+              </div>
+            )}
+          </div>
+          {["imprensa", "blog", "contato"].map(s => (
+            <button key={s} onClick={() => { onNav(s); setMenuOpen(false); }} style={{
+              background: "none", border: "none", cursor: "pointer", textAlign: "left",
+              fontFamily: "'DM Sans', sans-serif", fontSize: 14, letterSpacing: 1.5,
+              textTransform: "uppercase", color: active === s ? COLORS.gold : COLORS.cream,
+            }}>{labels[s]}</button>
           ))}
         </div>
       )}
@@ -148,7 +274,7 @@ function SectionTitle({ title, subtitle, align = "center" }) {
 }
 
 // HOME Section
-function Home({ onNav }) {
+function Home({ onNav, onNavigate }) {
   const [loaded, setLoaded] = useState(false);
   useEffect(() => { setTimeout(() => setLoaded(true), 100); }, []);
   return (
@@ -232,7 +358,7 @@ function Home({ onNav }) {
           display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap",
           opacity: loaded ? 1 : 0, transition: "opacity 1s ease 1s",
         }}>
-          <button onClick={() => onNav("espetaculo")} style={{
+          <button onClick={() => onNavigate("gestacao-de-cam")} style={{
             fontFamily: "'DM Sans', sans-serif", fontSize: 13, letterSpacing: 2,
             textTransform: "uppercase", padding: "16px 36px",
             background: `linear-gradient(135deg, ${COLORS.gold}, ${COLORS.goldDark})`,
@@ -369,137 +495,386 @@ function Coletivo() {
   );
 }
 
-// ESPETÁCULO Section
-function Espetaculo() {
+// GESTAÇÃO DE CAM — Dedicated page
+function GestacaoDeCamPage({ onBack }) {
   const [ref, inView] = useInView();
+  const [loaded, setLoaded] = useState(false);
+  useEffect(() => { setTimeout(() => setLoaded(true), 80); }, []);
   return (
-    <section id="espetaculo" style={{
-      padding: "clamp(80px, 10vw, 120px) clamp(20px, 4vw, 60px)",
-      background: `linear-gradient(180deg, ${COLORS.bgAlt} 0%, ${COLORS.bg} 100%)`,
-      position: "relative",
-    }}>
-      {/* Decorative side line */}
+    <div style={{ background: COLORS.bg, minHeight: "100vh", color: COLORS.cream }}>
+      {/* Page header */}
       <div style={{
-        position: "absolute", left: "clamp(20px, 4vw, 60px)", top: 120, bottom: 120,
-        width: 1, background: `linear-gradient(${COLORS.gold}00, ${COLORS.gold}33, ${COLORS.gold}00)`,
-      }} />
-      <div style={{ maxWidth: 1000, margin: "0 auto" }}>
-        <SectionTitle title="Gestação de Cam" subtitle="Espetáculo" />
-        <div ref={ref}>
-          {/* Hero image placeholder */}
-          <div style={{
-            width: "100%", height: "clamp(250px, 40vw, 450px)",
-            background: `linear-gradient(135deg, #1a1008, #2a1a0c, #1a1008)`,
-            border: `1px solid ${COLORS.grayDark}`,
-            display: "flex", alignItems: "center", justifyContent: "center",
-            marginBottom: 50, position: "relative", overflow: "hidden",
-            opacity: inView ? 1 : 0, transition: "opacity 1s ease",
-          }}>
-            <div style={{ position: "absolute", inset: 0, background: `radial-gradient(ellipse at 30% 50%, ${COLORS.gold}11 0%, transparent 70%)` }} />
-            <div style={{ textAlign: "center", position: "relative", zIndex: 1 }}>
-              <AdinkraSymbol size={50} color={`${COLORS.gold}55`} />
-              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: COLORS.gray, marginTop: 16, letterSpacing: 2 }}>
-                [ FOTO DE CENA DO ESPETÁCULO ]
+        padding: "120px clamp(20px, 4vw, 60px) clamp(60px, 8vw, 80px)",
+        background: `linear-gradient(180deg, ${COLORS.bgAlt} 0%, ${COLORS.bg} 100%)`,
+        position: "relative",
+        opacity: loaded ? 1 : 0, transition: "opacity 0.8s ease",
+      }}>
+        <div style={{
+          position: "absolute", left: "clamp(20px, 4vw, 60px)", top: 120, bottom: 0,
+          width: 1, background: `linear-gradient(${COLORS.gold}00, ${COLORS.gold}33, ${COLORS.gold}00)`,
+        }} />
+        <div style={{ maxWidth: 1000, margin: "0 auto" }}>
+          <button onClick={onBack} style={{
+            background: "none", border: "none", cursor: "pointer",
+            fontFamily: "'DM Sans', sans-serif", fontSize: 12, letterSpacing: 2,
+            textTransform: "uppercase", color: COLORS.gray, marginBottom: 40,
+            display: "flex", alignItems: "center", gap: 8, padding: 0,
+            transition: "color 0.2s",
+          }}
+            onMouseEnter={e => e.currentTarget.style.color = COLORS.gold}
+            onMouseLeave={e => e.currentTarget.style.color = COLORS.gray}
+          >
+            ← Voltar
+          </button>
+          <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 16 }}>
+            <div style={{ width: 40, height: 1, background: COLORS.gold }} />
+            <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 11, letterSpacing: 4, textTransform: "uppercase", color: COLORS.gold }}>Espetáculo</span>
+          </div>
+          <h1 style={{
+            fontFamily: "'Playfair Display', Georgia, serif",
+            fontSize: "clamp(42px, 8vw, 80px)", fontWeight: 700,
+            color: COLORS.cream, lineHeight: 1.05, margin: 0,
+          }}>Gestação de Cam</h1>
+        </div>
+      </div>
+      {/* Content */}
+      <div style={{ padding: "clamp(60px, 8vw, 100px) clamp(20px, 4vw, 60px)" }}>
+        <div style={{ maxWidth: 1000, margin: "0 auto" }}>
+          <div ref={ref}>
+            {/* Hero image placeholder */}
+            <div style={{
+              width: "100%", height: "clamp(250px, 40vw, 450px)",
+              background: `linear-gradient(135deg, #1a1008, #2a1a0c, #1a1008)`,
+              border: `1px solid ${COLORS.grayDark}`,
+              display: "flex", alignItems: "center", justifyContent: "center",
+              marginBottom: 50, position: "relative", overflow: "hidden",
+              opacity: inView ? 1 : 0, transition: "opacity 1s ease",
+            }}>
+              <div style={{ position: "absolute", inset: 0, background: `radial-gradient(ellipse at 30% 50%, ${COLORS.gold}11 0%, transparent 70%)` }} />
+              <div style={{ textAlign: "center", position: "relative", zIndex: 1 }}>
+                <AdinkraSymbol size={50} color={`${COLORS.gold}55`} />
+                <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: COLORS.gray, marginTop: 16, letterSpacing: 2 }}>
+                  [ FOTO DE CENA DO ESPETÁCULO ]
+                </p>
+              </div>
+            </div>
+            {/* Synopsis */}
+            <div style={{
+              maxWidth: 800, margin: "0 auto 50px",
+              opacity: inView ? 1 : 0, transform: inView ? "translateY(0)" : "translateY(30px)",
+              transition: "all 0.8s ease 0.3s",
+            }}>
+              <h3 style={{
+                fontFamily: "'DM Sans', sans-serif", fontSize: 12, letterSpacing: 3,
+                textTransform: "uppercase", color: COLORS.gold, marginBottom: 20,
+              }}>Sinopse</h3>
+              <p style={{
+                fontFamily: "'Playfair Display', Georgia, serif",
+                fontSize: "clamp(16px, 2vw, 20px)", color: COLORS.cream,
+                lineHeight: 1.8, margin: 0,
+              }}>
+                Três mulheres negras despertam sem memória. Tudo o que sabem é que compartilham o mesmo nome: Cam. Um dia, nasce uma criança que precisa ser protegida para não herdar a mesma maldição. Para isso, as mulheres embarcam em uma jornada pela floresta em busca de seu verdadeiro nome — aquele que lhes foi tirado.
+              </p>
+              <p style={{
+                fontFamily: "'DM Sans', sans-serif", fontSize: 15, color: COLORS.gray,
+                lineHeight: 1.8, marginTop: 20,
+              }}>
+                Nesse caminho encantado, cercado de folhas, cantos e mistérios, elas encontram divindades, histórias e desafios que revelam memórias guardadas em seus corpos e na terra. Uma performance que convida crianças e adultos a refletir, através da poesia e da imaginação, sobre a força da memória, da proteção e do afeto.
               </p>
             </div>
-          </div>
-          {/* Synopsis */}
-          <div style={{
-            maxWidth: 800, margin: "0 auto 50px",
-            opacity: inView ? 1 : 0, transform: inView ? "translateY(0)" : "translateY(30px)",
-            transition: "all 0.8s ease 0.3s",
-          }}>
-            <h3 style={{
-              fontFamily: "'DM Sans', sans-serif", fontSize: 12, letterSpacing: 3,
-              textTransform: "uppercase", color: COLORS.gold, marginBottom: 20,
-            }}>Sinopse</h3>
-            <p style={{
-              fontFamily: "'Playfair Display', Georgia, serif",
-              fontSize: "clamp(16px, 2vw, 20px)", color: COLORS.cream,
-              lineHeight: 1.8, margin: 0,
+            {/* Technical info grid */}
+            <div style={{
+              display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+              gap: 1, background: COLORS.grayDark,
+              border: `1px solid ${COLORS.grayDark}`,
+              opacity: inView ? 1 : 0, transition: "opacity 0.8s ease 0.5s",
             }}>
-              Três mulheres negras despertam sem memória. Tudo o que sabem é que compartilham o mesmo nome: Cam. Um dia, nasce uma criança que precisa ser protegida para não herdar a mesma maldição. Para isso, as mulheres embarcam em uma jornada pela floresta em busca de seu verdadeiro nome — aquele que lhes foi tirado.
-            </p>
-            <p style={{
-              fontFamily: "'DM Sans', sans-serif", fontSize: 15, color: COLORS.gray,
-              lineHeight: 1.8, marginTop: 20,
+              <div style={{ background: COLORS.bg, padding: "clamp(24px, 3vw, 36px)" }}>
+                <h4 style={{
+                  fontFamily: "'DM Sans', sans-serif", fontSize: 11, letterSpacing: 3,
+                  textTransform: "uppercase", color: COLORS.gold, marginBottom: 20, marginTop: 0,
+                }}>Ficha Técnica</h4>
+                {[
+                  ["Direção", "Coletiva"],
+                  ["Dramaturgia", "Camila Zenzele Pinho"],
+                  ["Elenco", "Camila Zenzele Pinho, Larissa Fernanda de Andrade, Sara Alves Timótheo"],
+                  ["Atriz Convidada", "Alice Lucas"],
+                  ["Trilha Sonora", "Nega Lu"],
+                  ["Percussão", "Moisés Ferreira"],
+                  ["Figurino / Iluminação", "Ricardo Almeida"],
+                ].map(([label, value], i) => (
+                  <div key={i} style={{ marginBottom: 12 }}>
+                    <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 11, color: COLORS.gray, textTransform: "uppercase", letterSpacing: 1 }}>{label}</span>
+                    <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, color: COLORS.cream, margin: "2px 0 0" }}>{value}</p>
+                  </div>
+                ))}
+              </div>
+              <div style={{ background: COLORS.bg, padding: "clamp(24px, 3vw, 36px)" }}>
+                <h4 style={{
+                  fontFamily: "'DM Sans', sans-serif", fontSize: 11, letterSpacing: 3,
+                  textTransform: "uppercase", color: COLORS.gold, marginBottom: 20, marginTop: 0,
+                }}>Informações Técnicas</h4>
+                {[
+                  ["Duração", "50 minutos"],
+                  ["Classificação", "12+"],
+                  ["Montagem", "3 horas"],
+                  ["Idioma", "Português"],
+                  ["Campo Artístico", "Teatro / Performance / Música"],
+                  ["Tipo", "Ensemble"],
+                ].map(([label, value], i) => (
+                  <div key={i} style={{
+                    display: "flex", justifyContent: "space-between", alignItems: "baseline",
+                    padding: "12px 0",
+                    borderBottom: i < 5 ? `1px solid ${COLORS.grayDark}` : "none",
+                  }}>
+                    <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: COLORS.gray }}>{label}</span>
+                    <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, color: COLORS.cream, fontWeight: 500 }}>{value}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            {/* Photo gallery placeholder */}
+            <div style={{
+              display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr))",
+              gap: 8, marginTop: 50,
+              opacity: inView ? 1 : 0, transition: "opacity 1s ease 0.7s",
             }}>
-              Nesse caminho encantado, cercado de folhas, cantos e mistérios, elas encontram divindades, histórias e desafios que revelam memórias guardadas em seus corpos e na terra. Uma performance que convida crianças e adultos a refletir, através da poesia e da imaginação, sobre a força da memória, da proteção e do afeto.
-            </p>
-          </div>
-          {/* Technical info grid */}
-          <div style={{
-            display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
-            gap: 1, background: COLORS.grayDark,
-            border: `1px solid ${COLORS.grayDark}`,
-            opacity: inView ? 1 : 0, transition: "opacity 0.8s ease 0.5s",
-          }}>
-            {/* Ficha Técnica */}
-            <div style={{ background: COLORS.bg, padding: "clamp(24px, 3vw, 36px)" }}>
-              <h4 style={{
-                fontFamily: "'DM Sans', sans-serif", fontSize: 11, letterSpacing: 3,
-                textTransform: "uppercase", color: COLORS.gold, marginBottom: 20, marginTop: 0,
-              }}>Ficha Técnica</h4>
-              {[
-                ["Direção", "Coletiva"],
-                ["Dramaturgia", "Camila Zenzele Pinho"],
-                ["Elenco", "Camila Zenzele Pinho, Larissa Fernanda de Andrade, Sara Alves Timótheo"],
-                ["Atriz Convidada", "Alice Lucas"],
-                ["Trilha Sonora", "Nega Lu"],
-                ["Percussão", "Moisés Ferreira"],
-                ["Figurino / Iluminação", "Ricardo Almeida"],
-              ].map(([label, value], i) => (
-                <div key={i} style={{ marginBottom: 12 }}>
-                  <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 11, color: COLORS.gray, textTransform: "uppercase", letterSpacing: 1 }}>{label}</span>
-                  <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, color: COLORS.cream, margin: "2px 0 0" }}>{value}</p>
+              {[1, 2, 3, 4].map(i => (
+                <div key={i} style={{
+                  aspectRatio: i === 1 ? "4/5" : i === 2 ? "1/1" : "3/4",
+                  background: `linear-gradient(${135 + i * 30}deg, #1a1008, #2a1a0c)`,
+                  border: `1px solid ${COLORS.grayDark}`,
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                }}>
+                  <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 11, color: COLORS.gray, letterSpacing: 1 }}>FOTO {i}</span>
                 </div>
               ))}
             </div>
-            {/* Info para contratantes */}
-            <div style={{ background: COLORS.bg, padding: "clamp(24px, 3vw, 36px)" }}>
-              <h4 style={{
-                fontFamily: "'DM Sans', sans-serif", fontSize: 11, letterSpacing: 3,
-                textTransform: "uppercase", color: COLORS.gold, marginBottom: 20, marginTop: 0,
-              }}>Informações Técnicas</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// FESTIVAL RAINHA TERÊ — Dedicated page
+function RainhaTerePage({ onBack }) {
+  const [ref, inView] = useInView();
+  const [loaded, setLoaded] = useState(false);
+  useEffect(() => { setTimeout(() => setLoaded(true), 80); }, []);
+  const stripes = [COLORS_TERE.red, COLORS_TERE.olive, COLORS_TERE.yellow, COLORS_TERE.peach, COLORS_TERE.golden, COLORS_TERE.olive, COLORS_TERE.red];
+  return (
+    <div style={{ background: COLORS_TERE.bg, minHeight: "100vh", color: COLORS_TERE.cream }}>
+      {/* Hero */}
+      <section style={{
+        minHeight: "100vh", display: "flex", flexDirection: "column",
+        justifyContent: "center", alignItems: "center", textAlign: "center",
+        position: "relative", overflow: "hidden",
+        padding: "100px clamp(20px, 4vw, 60px) 80px",
+        background: `linear-gradient(170deg, ${COLORS_TERE.bgAlt} 0%, ${COLORS_TERE.bg} 60%, #2a3a10 100%)`,
+      }}>
+        {/* Back button */}
+        <button onClick={onBack} style={{
+          position: "absolute", top: 90, left: "clamp(20px, 4vw, 60px)",
+          background: "none", border: "none", cursor: "pointer",
+          fontFamily: "'DM Sans', sans-serif", fontSize: 12, letterSpacing: 2,
+          textTransform: "uppercase", color: COLORS_TERE.gray,
+          display: "flex", alignItems: "center", gap: 8, padding: 0,
+          transition: "color 0.2s",
+        }}
+          onMouseEnter={e => e.currentTarget.style.color = COLORS_TERE.yellow}
+          onMouseLeave={e => e.currentTarget.style.color = COLORS_TERE.gray}
+        >
+          ← Voltar
+        </button>
+        {/* Content */}
+        <div style={{
+          position: "relative", zIndex: 2,
+          opacity: loaded ? 1 : 0, transform: loaded ? "translateY(0)" : "translateY(40px)",
+          transition: "all 1.2s cubic-bezier(0.16, 1, 0.3, 1)",
+        }}>
+          <div style={{ marginBottom: 32 }}>
+            <TereLogoSVG size={140} spin={true} />
+          </div>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 16, marginBottom: 20 }}>
+            <div style={{ width: 50, height: 1, background: `linear-gradient(90deg, transparent, ${COLORS_TERE.yellow})` }} />
+            <span style={{
+              fontFamily: "'DM Sans', sans-serif", fontSize: 11, letterSpacing: 4,
+              textTransform: "uppercase", color: COLORS_TERE.yellow,
+            }}>Rondonópolis · MT</span>
+            <div style={{ width: 50, height: 1, background: `linear-gradient(90deg, ${COLORS_TERE.yellow}, transparent)` }} />
+          </div>
+          <h1 style={{
+            fontFamily: "'Bebas Neue', 'Barlow Condensed', 'DM Sans', sans-serif",
+            fontSize: "clamp(52px, 12vw, 120px)", fontWeight: 700,
+            color: COLORS_TERE.cream, lineHeight: 0.9, margin: "0 0 16px",
+            letterSpacing: 2,
+          }}>
+            Festival de Teatro<br />
+            <span style={{ color: COLORS_TERE.yellow }}>Rainha Terê</span>
+          </h1>
+          <p style={{
+            fontFamily: "'DM Sans', sans-serif", fontSize: "clamp(13px, 1.5vw, 16px)",
+            color: COLORS_TERE.gray, letterSpacing: 3, textTransform: "uppercase",
+            margin: "0 auto 40px",
+          }}>
+            Mato Grosso Negro: Quem Somos?
+          </p>
+          <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
+            {["2024", "2025"].map(y => (
+              <span key={y} style={{
+                fontFamily: "'Bebas Neue', 'Barlow Condensed', sans-serif",
+                fontSize: 20, letterSpacing: 3,
+                border: `1px solid ${COLORS_TERE.yellow}66`,
+                color: COLORS_TERE.yellow, padding: "6px 20px",
+              }}>{y}ª Edição</span>
+            ))}
+          </div>
+        </div>
+        {/* Bottom stripe band */}
+        <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, display: "flex", height: 8 }}>
+          {stripes.map((c, i) => <div key={i} style={{ flex: 1, background: c }} />)}
+        </div>
+      </section>
+
+      {/* Sobre o Festival */}
+      <section style={{ padding: "clamp(70px, 10vw, 100px) clamp(20px, 4vw, 60px)" }}>
+        <div style={{ maxWidth: 1000, margin: "0 auto" }} ref={ref}>
+          <div style={{
+            display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 60,
+            opacity: inView ? 1 : 0, transform: inView ? "translateY(0)" : "translateY(30px)",
+            transition: "all 0.8s ease",
+          }}>
+            <div>
+              <div style={{ marginBottom: 24 }}>
+                <TereArrow width={52} />
+              </div>
+              <h2 style={{
+                fontFamily: "'Bebas Neue', 'Barlow Condensed', sans-serif",
+                fontSize: "clamp(32px, 5vw, 48px)", color: COLORS_TERE.cream,
+                letterSpacing: 2, margin: "0 0 20px",
+              }}>Sobre o Festival</h2>
+              <p style={{
+                fontFamily: "'DM Sans', sans-serif", fontSize: 15,
+                color: COLORS_TERE.gray, lineHeight: 1.8,
+              }}>
+                O Festival de Teatro Rainha Terê é uma iniciativa do Coletivo Gestação que celebra a cena teatral negra mato-grossense. Com o tema "Mato Grosso Negro: Quem Somos?", o festival reúne grupos e coletivos de teatro negro para compartilhar experiências, processos criativos e perspectivas afrocentradas.
+              </p>
+              <p style={{
+                fontFamily: "'DM Sans', sans-serif", fontSize: 15,
+                color: COLORS_TERE.gray, lineHeight: 1.8, marginTop: 16,
+              }}>
+                Realizado em Rondonópolis, MT, o festival se propõe a ser um espaço de encontro, formação e afirmação da identidade negra no teatro regional.
+              </p>
+            </div>
+            <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
               {[
-                ["Duração", "50 minutos"],
-                ["Classificação", "12+"],
-                ["Montagem", "3 horas"],
-                ["Idioma", "Português"],
-                ["Campo Artístico", "Teatro / Performance / Música"],
-                ["Tipo", "Ensemble"],
+                ["Local", "Rondonópolis, Mato Grosso"],
+                ["Organização", "Coletivo Gestação"],
+                ["Edições", "2024 · 2025"],
+                ["Instagram", "@festivalrainhatere"],
+                ["Realização", "Viver Cultura · SECEL · Governo de MT"],
               ].map(([label, value], i) => (
                 <div key={i} style={{
-                  display: "flex", justifyContent: "space-between", alignItems: "baseline",
-                  padding: "12px 0",
-                  borderBottom: i < 5 ? `1px solid ${COLORS.grayDark}` : "none",
+                  padding: "16px 20px",
+                  background: COLORS_TERE.bgCard,
+                  borderLeft: `3px solid ${COLORS_TERE.yellow}`,
+                  opacity: inView ? 1 : 0,
+                  transform: inView ? "translateX(0)" : "translateX(20px)",
+                  transition: `all 0.6s ease ${0.1 + i * 0.08}s`,
                 }}>
-                  <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: COLORS.gray }}>{label}</span>
-                  <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, color: COLORS.cream, fontWeight: 500 }}>{value}</span>
+                  <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 10, color: COLORS_TERE.yellow, letterSpacing: 2, textTransform: "uppercase" }}>{label}</span>
+                  <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, color: COLORS_TERE.cream, margin: "4px 0 0" }}>{value}</p>
                 </div>
               ))}
             </div>
           </div>
-          {/* Photo gallery placeholder */}
-          <div style={{
-            display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr))",
-            gap: 8, marginTop: 50,
-            opacity: inView ? 1 : 0, transition: "opacity 1s ease 0.7s",
-          }}>
-            {[1, 2, 3, 4].map(i => (
+        </div>
+      </section>
+
+      {/* Stripe divider */}
+      <div style={{ display: "flex", height: 6 }}>
+        {stripes.map((c, i) => <div key={i} style={{ flex: 1, background: c }} />)}
+      </div>
+
+      {/* Edições */}
+      <section style={{ padding: "clamp(70px, 10vw, 100px) clamp(20px, 4vw, 60px)", background: COLORS_TERE.bgAlt }}>
+        <div style={{ maxWidth: 1000, margin: "0 auto" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 48 }}>
+            <div style={{ width: 40, height: 1, background: COLORS_TERE.yellow }} />
+            <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 11, letterSpacing: 4, textTransform: "uppercase", color: COLORS_TERE.yellow }}>Histórico</span>
+          </div>
+          <h2 style={{
+            fontFamily: "'Bebas Neue', 'Barlow Condensed', sans-serif",
+            fontSize: "clamp(36px, 6vw, 60px)", color: COLORS_TERE.cream,
+            letterSpacing: 2, margin: "0 0 48px",
+          }}>Edições</h2>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 24 }}>
+            {[
+              { year: "2024", subtitle: "1ª Edição", info: "Rondonópolis, MT" },
+              { year: "2025", subtitle: "2ª Edição", info: "Rondonópolis, MT" },
+            ].map((ed, i) => (
               <div key={i} style={{
-                aspectRatio: i === 1 ? "4/5" : i === 2 ? "1/1" : "3/4",
-                background: `linear-gradient(${135 + i * 30}deg, #1a1008, #2a1a0c)`,
-                border: `1px solid ${COLORS.grayDark}`,
-                display: "flex", alignItems: "center", justifyContent: "center",
+                background: COLORS_TERE.bgCard,
+                border: `1px solid ${COLORS_TERE.yellow}33`,
+                padding: "clamp(28px, 4vw, 44px)",
+                position: "relative", overflow: "hidden",
               }}>
-                <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 11, color: COLORS.gray, letterSpacing: 1 }}>FOTO {i}</span>
+                <div style={{
+                  position: "absolute", top: -20, right: -20, opacity: 0.06,
+                }}>
+                  <TereLogoSVG size={130} />
+                </div>
+                <div style={{ position: "relative", zIndex: 1 }}>
+                  <h3 style={{
+                    fontFamily: "'Bebas Neue', 'Barlow Condensed', sans-serif",
+                    fontSize: "clamp(64px, 10vw, 96px)", color: COLORS_TERE.yellow,
+                    lineHeight: 1, margin: "0 0 4px", letterSpacing: 2,
+                  }}>{ed.year}</h3>
+                  <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 12, color: COLORS_TERE.gray, letterSpacing: 2, textTransform: "uppercase", margin: "0 0 20px" }}>{ed.subtitle} · {ed.info}</p>
+                  <div style={{ height: 1, background: COLORS_TERE.grayDark, marginBottom: 20 }} />
+                  <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, color: COLORS_TERE.gray, lineHeight: 1.7 }}>
+                    Informações sobre a edição em breve.
+                  </p>
+                </div>
               </div>
             ))}
           </div>
         </div>
+      </section>
+
+      {/* Espetáculos Convidados */}
+      <section style={{ padding: "clamp(70px, 10vw, 100px) clamp(20px, 4vw, 60px)" }}>
+        <div style={{ maxWidth: 1000, margin: "0 auto", textAlign: "center" }}>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 16, marginBottom: 16 }}>
+            <TereArrow width={36} />
+            <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 11, letterSpacing: 4, textTransform: "uppercase", color: COLORS_TERE.yellow }}>Programação</span>
+            <TereArrow width={36} color={COLORS_TERE.olive} />
+          </div>
+          <h2 style={{
+            fontFamily: "'Bebas Neue', 'Barlow Condensed', sans-serif",
+            fontSize: "clamp(36px, 6vw, 60px)", color: COLORS_TERE.cream,
+            letterSpacing: 2, margin: "0 0 16px",
+          }}>Espetáculos Convidados</h2>
+          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, color: COLORS_TERE.gray, marginBottom: 48 }}>
+            Programação da próxima edição em breve.
+          </p>
+          <div style={{
+            border: `1px dashed ${COLORS_TERE.yellow}33`,
+            padding: "clamp(40px, 6vw, 80px)", color: COLORS_TERE.gray,
+            fontFamily: "'DM Sans', sans-serif", fontSize: 13, letterSpacing: 2,
+            textTransform: "uppercase",
+          }}>
+            Em breve
+          </div>
+        </div>
+      </section>
+
+      {/* Bottom stripe */}
+      <div style={{ display: "flex", height: 8 }}>
+        {stripes.map((c, i) => <div key={i} style={{ flex: 1, background: c }} />)}
       </div>
-    </section>
+    </div>
   );
 }
 
@@ -696,7 +1071,7 @@ function BlogModal({ post, onClose }) {
     <div
       onClick={onClose}
       style={{
-        position: "fixed", inset: 0, zIndex: 200,
+        position: "fixed", inset: 0, zIndex: 300,
         background: "rgba(0,0,0,0.85)", backdropFilter: "blur(6px)",
         display: "flex", alignItems: "flex-start", justifyContent: "center",
         padding: "clamp(16px, 4vw, 40px)",
@@ -999,13 +1374,26 @@ function Footer() {
 // Main App
 export default function App() {
   const [active, setActive] = useState("home");
+  const [currentPage, setCurrentPage] = useState("main");
+
+  const navigateTo = (page) => {
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   const scrollTo = (id) => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
-      setActive(id);
+    if (currentPage !== "main") {
+      setCurrentPage("main");
+      setTimeout(() => {
+        const el = document.getElementById(id);
+        if (el) { el.scrollIntoView({ behavior: "smooth" }); setActive(id); }
+      }, 50);
+    } else {
+      const el = document.getElementById(id);
+      if (el) { el.scrollIntoView({ behavior: "smooth" }); setActive(id); }
     }
   };
+
   useEffect(() => {
     const handler = () => {
       for (const s of [...SECTIONS].reverse()) {
@@ -1021,9 +1409,9 @@ export default function App() {
   }, []);
 
   return (
-    <div style={{ background: COLORS.bg, color: COLORS.white, minHeight: "100vh" }}>
+    <div style={{ background: currentPage === "main" ? COLORS.bg : COLORS_TERE.bg, color: COLORS.white, minHeight: "100vh" }}>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Bebas+Neue&family=Barlow+Condensed:wght@600;700&display=swap');
         * { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; }
         body { overflow-x: hidden; }
@@ -1031,6 +1419,10 @@ export default function App() {
         @keyframes float {
           0%, 100% { transform: translateX(-50%) translateY(0); }
           50% { transform: translateX(-50%) translateY(8px); }
+        }
+        @keyframes logoSpin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
         }
         @media (max-width: 768px) {
           .desktop-nav { display: none !important; }
@@ -1044,14 +1436,17 @@ export default function App() {
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes slideUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
       `}</style>
-      <Nav active={active} onNav={scrollTo} />
-      <Home onNav={scrollTo} />
-      <Coletivo />
-      <Espetaculo />
-      <Imprensa />
-      <Blog />
-      <Contato />
-      <Footer />
+      <Nav active={active} onNav={scrollTo} onNavigate={navigateTo} currentPage={currentPage} />
+      {currentPage === "gestacao-de-cam" && <GestacaoDeCamPage onBack={() => scrollTo("home")} />}
+      {currentPage === "rainha-tere" && <RainhaTerePage onBack={() => scrollTo("home")} />}
+      {currentPage === "main" && <>
+        <Home onNav={scrollTo} onNavigate={navigateTo} />
+        <Coletivo />
+        <Imprensa />
+        <Blog />
+        <Contato />
+        <Footer />
+      </>}
     </div>
   );
 }
