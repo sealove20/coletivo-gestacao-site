@@ -95,6 +95,7 @@ function Nav({ active, onNav, onNavigate, currentPage }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [mobileShowsOpen, setMobileShowsOpen] = useState(false);
+  const closeTimeoutRef = useRef(null);
   useEffect(() => {
     const h = () => setScrolled(window.scrollY > 60);
     window.addEventListener("scroll", h);
@@ -131,8 +132,8 @@ function Nav({ active, onNav, onNavigate, currentPage }) {
           <button style={navBtnStyle("coletivo")} onClick={() => onNav("coletivo")}>O Coletivo</button>
           {/* Espetáculos dropdown */}
           <div style={{ position: "relative" }}
-            onMouseEnter={() => setDropdownOpen(true)}
-            onMouseLeave={() => setDropdownOpen(false)}>
+            onMouseEnter={() => { clearTimeout(closeTimeoutRef.current); setDropdownOpen(true); }}
+            onMouseLeave={() => { closeTimeoutRef.current = setTimeout(() => setDropdownOpen(false), 150); }}>
             <button style={{
               ...navBtnStyle("_espetaculos"),
               color: isEspetaculosActive ? COLORS.gold : COLORS.gray,
