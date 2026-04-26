@@ -9,13 +9,18 @@ Website for **Coletivo Gestação**, an Afro-perspective black theater collectiv
 ## Commands
 
 ```bash
-npm install       # Install dependencies
-npm run dev       # Start dev server at http://localhost:5173
-npm run build     # Production build → dist/
-npm run preview   # Preview the production build locally
+pnpm install       # Install dependencies
+pnpm dev           # Start dev server at http://localhost:5173
+pnpm build         # Production build → dist/
+pnpm preview       # Preview the production build locally
 ```
 
 No test or lint commands are configured.
+
+## Git Commits
+
+- Use semantic commit messages: `type: description` (e.g. `feat:`, `fix:`, `chore:`, `docs:`, `refactor:`, `style:`)
+- Do NOT include `Co-Authored-By` trailers in commit messages.
 
 ## Architecture
 
@@ -37,6 +42,6 @@ The entire application lives in **`src/App.jsx`** (~838 lines) — a single-file
 
 ## Deployment
 
-Hosted on Vercel with auto-detection of Vite. Push to GitHub triggers automatic deployment. Build command: `npm run build`, output: `dist/`.
+Hosted on Vercel with auto-detection of Vite. Push to GitHub triggers automatic deployment. Build command: `pnpm build`, output: `dist/`.
 
 Images go in `public/images/` (currently placeholders).
