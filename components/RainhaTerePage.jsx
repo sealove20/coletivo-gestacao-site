@@ -89,7 +89,7 @@ export default function RainhaTerePage() {
             Mato Grosso Negro: Quem Somos?
           </p>
           <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
-            {['2024', '2025'].map(y => (
+            {['2024', '2025', '2026'].map(y => (
               <span key={y} style={{
                 fontFamily: "'Bebas Neue', 'Barlow Condensed', sans-serif",
                 fontSize: 20, letterSpacing: 3,
@@ -133,7 +133,7 @@ export default function RainhaTerePage() {
               {[
                 ['Local', 'Rondonópolis, Mato Grosso'],
                 ['Organização', 'Coletivo Gestação'],
-                ['Edições', '2024 · 2025'],
+                ['Edições', '2024 · 2025 · 2026'],
                 ['Instagram', '@festivalrainhatere'],
                 ['Realização', 'Viver Cultura · SECEL · Governo de MT'],
               ].map(([label, value], i) => (
@@ -175,6 +175,7 @@ export default function RainhaTerePage() {
             {[
               { year: '2024', subtitle: '1ª Edição', info: 'Rondonópolis, MT' },
               { year: '2025', subtitle: '2ª Edição', info: 'Rondonópolis, MT' },
+              { year: '2026', subtitle: '3ª Edição', info: 'Rondonópolis, MT' },
             ].map((ed, i) => (
               <div key={i} style={{
                 background: COLORS_TERE.bgCard,
