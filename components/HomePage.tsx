@@ -423,6 +423,7 @@ function BlogModal({ post, onClose }: BlogModalProps) {
           </div>
         </div>
         <div
+          className="post-content"
           dangerouslySetInnerHTML={{ __html: post.content }}
           style={{
             fontFamily: "'DM Sans', sans-serif",

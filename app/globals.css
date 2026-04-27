@@ -63,6 +63,12 @@ body {
 a:hover { opacity: 0.85; }
 button:hover { opacity: 0.9; }
 
+.post-content img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
