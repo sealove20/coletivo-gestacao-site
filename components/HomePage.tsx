@@ -6,8 +6,8 @@ import { COLORS, SECTIONS } from '@/lib/constants'
 import { useInView, AdinkraSymbol, StarDecor, SectionTitle } from '@/components/Shared'
 import Nav from '@/components/Nav'
 
-interface BlogPost {
-  id: number
+export interface BlogPost {
+  slug: string
   category: string
   tag: string
   title: string
@@ -15,7 +15,7 @@ interface BlogPost {
   author: string
   date: string
   readTime: string
-  content: string[]
+  content: string
 }
 
 interface CastMember {
@@ -357,88 +357,6 @@ function Imprensa() {
   )
 }
 
-const BLOG_POSTS: BlogPost[] = [
-  {
-    id: 1,
-    category: 'Reflexão',
-    tag: 'Dramaturgia',
-    title: 'A Memória Como Resistência: Reflexões sobre Gestação de Cam',
-    excerpt: 'Em Gestação de Cam, a memória não é apenas recordação — é ato político. Três mulheres que despertam sem nome carregam no corpo a história de todas as que vieram antes. Este texto explora como a dramaturgia converte o esquecimento imposto em semente de recriação.',
-    author: 'Camila Zenzele Pinho',
-    date: 'Fevereiro 2025',
-    readTime: '6 min',
-    content: [
-      'Quando três mulheres despertam sem saber seus nomes, a primeira reação do público costuma ser a estranheza. Mas há algo de profundamente familiar nesse estado — porque o esquecimento forçado é uma das ferramentas mais antigas do apagamento cultural. Em Gestação de Cam, esse esquecimento não é um ponto de partida dramático qualquer: é a síntese de séculos de violência epistêmica contra povos negros.',
-      'A dramaturgia que construímos coletivamente parte de uma pergunta simples: o que resta quando tiram de você o seu nome? A resposta que encontramos no processo de criação foi surpreendente — resta o corpo. Resta o ritmo. Resta a voz que, mesmo sem saber o que diz, sabe como cantar. A memória corporal, aquela que a colonização não conseguiu apagar completamente, é o fio condutor de toda a peça.',
-      'Cada cena foi construída a partir de práticas de pesquisa em afroperspectividades, teoria que propõe colocar as epistemologias africanas e afro-diaspóricas no centro da produção de conhecimento. Isso significa que não adaptamos mitos europeus para "incluir" personagens negras — criamos a partir de dentro, com as ferramentas que nossa própria tradição nos oferece: o canto como invocação, o corpo como arquivo, a floresta como território sagrado.',
-      'A resistência, aqui, não é grito. É germinação. As personagens não lutam contra uma força externa visível — elas buscam dentro de si aquilo que sempre esteve lá. E quando encontram, não apenas recuperam um nome: constroem um futuro diferente para a criança que nasce entre elas. Esse movimento — do esquecimento para a memória, da maldição para a proteção — é, em essência, o que entendemos por resistência cultural.',
-    ],
-  },
-  {
-    id: 2,
-    category: 'Pensamento',
-    tag: 'Teoria',
-    title: 'Afroperspectivismo no Teatro: O que é e por que importa',
-    excerpt: 'O termo afroperspectividade surge da filosofia de Renato Noguera e propõe um giro epistêmico: colocar as perspectivas africanas e afro-diaspóricas no centro, não como exotismo, mas como método. Entenda como o Coletivo Gestação aplica esse conceito à cena.',
-    author: 'Camila Zenzele Pinho',
-    date: 'Outubro 2024',
-    readTime: '8 min',
-    content: [
-      'Quando falamos em afroperspectividade, não estamos falando de um estilo estético ou de uma temática específica. Estamos falando de um método — uma forma de produzir conhecimento que parte de referenciais filosóficos africanos e afro-diaspóricos como centro, e não como margem ou complemento. O conceito foi desenvolvido pelo filósofo Renato Noguera e tem se mostrado uma ferramenta poderosa para repensar não apenas o que fazemos, mas como fazemos.',
-      'No teatro, isso se traduz em algumas perguntas fundamentais: Quem fala? De onde fala? Para quem? Com quais ferramentas simbólicas? Um teatro afroperspectivista não é simplesmente um teatro "sobre negros" — é um teatro que opera a partir de lógicas cosmológicas, filosóficas e estéticas nascidas em terras africanas e reelaboradas na diáspora. A diferença é enorme.',
-      'No Coletivo Gestação, essa perspectiva se manifesta na estrutura dramatúrgica: o tempo circular em vez de linear, a presença de divindades não como metáfora mas como agentes da narrativa, o corpo coletivo que pulsa junto antes de se individualizar, a música como dramaturgia e não como ilustração. Não adaptamos o modelo do teatro ocidental para "incluir" elementos afro — partimos de outro lugar.',
-      'Isso não significa exclusão. Significa que quando o espetáculo chega a um palco universitário em São Paulo ou a um festival em Rondonópolis, ele não pede licença para existir nem traduz a si mesmo para uma suposta "linguagem universal". Ele propõe ao público que se mova em direção a ele — e a resposta, em todos os contextos, tem sido de encontro genuíno.',
-    ],
-  },
-  {
-    id: 3,
-    category: 'Bastidores',
-    tag: 'Festival',
-    title: 'Festival Satyrianas 2023: Nossa Experiência em São Paulo',
-    excerpt: 'Levar Gestação de Cam a um dos maiores festivais universitários de teatro do Brasil foi uma prova de fé coletiva. Aqui contamos os desafios da viagem, o encontro com outros grupos negros e o que voltou diferente em cada uma de nós.',
-    author: 'Larissa Fernanda de Andrade',
-    date: 'Novembro 2023',
-    readTime: '5 min',
-    content: [
-      'A convocatória chegou em um momento em que o coletivo estava em pleno processo de revisão do espetáculo. Inscrever Gestação de Cam no Festival Satyrianas parecia, ao mesmo tempo, um salto necessário e um risco enorme. Éramos um grupo de Rondonópolis, cidade do interior de Mato Grosso, indo ao encontro de grupos teatrais de todo o Brasil — muitos deles com anos de trajetória em grandes centros.',
-      'A viagem de ônibus foi longa. Dividimos os custos, arrumamos mala com figurino e adereços, e partimos com a certeza de que o espetáculo carregava algo verdadeiro. A recepção no festival nos surpreendeu desde o primeiro dia: outros grupos negros nos procuraram para conversar sobre processo, sobre as escolhas estéticas, sobre afroperspectividade. Havia um reconhecimento mútuo que ultrapassava o elogio.',
-      'A apresentação aconteceu em um espaço pequeno, com capacidade para cerca de oitenta pessoas. Estava lotado. O silêncio durante o espetáculo foi diferente dos silêncios que conhecíamos — mais denso, mais atento. E o encontro depois, com a plateia ainda presente no espaço, foi onde a peça de fato se completou.',
-      'O que voltou diferente em cada uma de nós é difícil de nomear com precisão. Talvez seja a certeza de que o que fazemos não é local no sentido limitante da palavra — é local no sentido de que nasce de um lugar específico, de uma experiência específica, e é exatamente por isso que ressoa em qualquer outro lugar.',
-    ],
-  },
-  {
-    id: 4,
-    category: 'Ancestralidade',
-    tag: 'Pesquisa',
-    title: 'Cam e a Mitologia: A Maldição Reinterpretada',
-    excerpt: 'A figura bíblica de Cam foi usada por séculos para justificar a escravidão. Nossa dramaturgia se recusa a aceitar essa narrativa. Aqui detalhamos o processo de reescrita mítica que dá origem ao espetáculo.',
-    author: 'Camila Zenzele Pinho',
-    date: 'Março 2023',
-    readTime: '10 min',
-    content: [
-      'A chamada "Maldição de Cam" é um dos exemplos mais devastadores de como a interpretação religiosa pode ser instrumentalizada para fins políticos. A passagem do Gênesis em que Noé amaldiçoa Canaã, filho de Cam, foi reinterpretada ao longo dos séculos como justificativa teológica para a escravidão dos povos africanos. Cam teria sido o "pai dos negros" e, portanto, toda a sua descendência estaria condenada à servidão.',
-      'Quando me deparei com essa interpretação durante minha pesquisa de mestrado, a reação foi imediata: recusar. Não como negação ingênua, mas como ato dramaturgo consciente. Se essa narrativa foi construída, pode ser desconstruída. Se foi usada para apagar, pode ser reescrita para iluminar.',
-      'O processo de pesquisa envolveu mergulhar em cosmologias africanas, em especial nas tradições yorubá e banto, buscando figuras femininas de proteção e memória. Encontramos nas yabás — orixás femininos — uma galeria de mulheres que carregam em si contradições, poderes e histórias muito mais ricas do que qualquer maldição bíblica poderia conter. Cam, em nossa dramaturgia, não é amaldiçoada: é uma mulher que teve seu nome roubado e que parte em busca dele.',
-      'A reescrita não apaga o peso histórico da maldição original — ela o carrega e o transforma. As três mulheres que compartilham o nome Cam não fogem da ferida: elas a atravessam. E ao atravessá-la, encontram não apenas seus nomes, mas a capacidade de nomear a criança que nasce — de garantir que ela não herde o esquecimento, mas a memória.',
-    ],
-  },
-  {
-    id: 5,
-    category: 'Processo Criativo',
-    tag: 'Música',
-    title: 'Música Como Medicina: A Trilha Sonora de Nega Lu',
-    excerpt: 'As canções compostas por Nega Lu para Gestação de Cam não são ornamento — são estrutura dramatúrgica. Cada tema musical corresponde a um estágio da jornada das personagens e carrega em si uma intenção de cura.',
-    author: 'Sara Alves Timótheo',
-    date: 'Janeiro 2023',
-    readTime: '7 min',
-    content: [
-      'Antes de existirem palavras para descrever o que queríamos fazer em cena, existia som. Nas primeiras sessões de criação do espetáculo, muito antes de termos um roteiro definido, Nega Lu já trazia melodias que pareciam saber o que a peça iria dizer. Havia algo de oracular nesse processo — a música chegava antes da cena e a cena nascia a partir da música.',
-      'Nega Lu trabalha a partir de uma prática que ela mesma chama de "composição medicinal": cada canção é criada com uma intenção específica de cura ou de abertura. Para Gestação de Cam, ela compôs temas que correspondem aos estados emocionais e espirituais das personagens: há uma canção para o estado de esquecimento, quase um lamento sem palavras; há um tema para o momento em que as mulheres se reconhecem entre si; e há o canto final, que é também uma oração.',
-      'A percussão de Moisés Ferreira se integra a esse universo não como acompanhamento rítmico, mas como voz própria. Em alguns momentos do espetáculo, o tambor dialoga diretamente com as atrizes — responde, pergunta, confirma. Quem assiste sem saber pode pensar que isso é improvisação; na verdade, é uma partitura muito precisa, desenvolvida ao longo de meses de ensaio.',
-      'O que nos surpreende, espetáculo após espetáculo, é ver como a plateia responde à música antes de processar o texto. Crianças que nunca viram teatro, adultos que raramente frequentam espetáculos — todos entram em sincronia com o ritmo antes de entender a história. Isso confirma o que sabemos há muito tempo: o corpo entende o que a mente ainda está tentando traduzir.',
-    ],
-  },
-]
 
 function BlogModal({ post, onClose }: BlogModalProps) {
   useEffect(() => {
@@ -504,17 +422,15 @@ function BlogModal({ post, onClose }: BlogModalProps) {
             <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 12, color: COLORS.gray, margin: 0 }}>{post.date} · {post.readTime} de leitura</p>
           </div>
         </div>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 22 }}>
-          {post.content.map((paragraph, i) => (
-            <p key={i} style={{
-              fontFamily: i === 0 ? "'Playfair Display', Georgia, serif" : "'DM Sans', sans-serif",
-              fontSize: i === 0 ? 'clamp(16px, 2vw, 19px)' : 15,
-              color: i === 0 ? COLORS.cream : COLORS.gray,
-              lineHeight: 1.85, margin: 0,
-              fontStyle: i === 0 ? 'italic' : 'normal',
-            }}>{paragraph}</p>
-          ))}
-        </div>
+        <div
+          dangerouslySetInnerHTML={{ __html: post.content }}
+          style={{
+            fontFamily: "'DM Sans', sans-serif",
+            fontSize: 15,
+            color: COLORS.gray,
+            lineHeight: 1.85,
+          }}
+        />
         <div style={{
           marginTop: 40, paddingTop: 28, borderTop: `1px solid ${COLORS.grayDark}`,
           display: 'flex', justifyContent: 'flex-end',
@@ -582,10 +498,11 @@ function BlogCard({ post, featured = false, inView, delay = 0, onClick }: BlogCa
   )
 }
 
-function Blog() {
+function Blog({ posts }: { posts: BlogPost[] }) {
   const [ref, inView] = useInView()
   const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null)
-  const [featured, ...rest] = BLOG_POSTS
+  const [featured, ...rest] = posts
+  if (!featured) return null
   return (
     <section id="blog" style={{
       padding: 'clamp(80px, 10vw, 120px) clamp(20px, 4vw, 60px)',
@@ -597,7 +514,7 @@ function Blog() {
           <BlogCard post={featured} featured inView={inView} delay={0.1} onClick={() => setSelectedPost(featured)} />
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 20 }}>
             {rest.map((post, i) => (
-              <BlogCard key={post.id} post={post} inView={inView} delay={0.2 + i * 0.1} onClick={() => setSelectedPost(post)} />
+              <BlogCard key={post.slug} post={post} inView={inView} delay={0.2 + i * 0.1} onClick={() => setSelectedPost(post)} />
             ))}
           </div>
         </div>
@@ -672,7 +589,7 @@ function Footer() {
   )
 }
 
-export default function HomePage() {
+export default function HomePage({ posts }: { posts: BlogPost[] }) {
   const [active, setActive] = useState('home')
 
   const scrollTo = (id: string) => {
@@ -707,7 +624,7 @@ export default function HomePage() {
       <Home onNav={scrollTo} />
       <Coletivo />
       <Imprensa />
-      <Blog />
+      <Blog posts={posts} />
       <Contato />
       <Footer />
     </div>
