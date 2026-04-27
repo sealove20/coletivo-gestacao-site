@@ -91,7 +91,7 @@ export default function BatuquePage() {
           transition: 'all 1.2s cubic-bezier(0.16, 1, 0.3, 1)',
         }}>
           <div style={{ marginBottom: 32 }}>
-            <DrumSVG size={160} />
+            <img src="/Logo_tambor.png" alt="Feira Criativa Batuquê" style={{ width: 160, height: 'auto' }} />
           </div>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 16, marginBottom: 16 }}>
             <div style={{ width: 50, height: 1, background: `linear-gradient(90deg, transparent, ${C.golden})` }} />
