@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { COLORS, COLORS_TERE } from '@/lib/constants'
+import { COLORS, COLORS_TERE, COLORS_BATUQUE } from '@/lib/constants'
 import { AdinkraSymbol } from '@/components/Shared'
 
 export default function Nav({ active, onNav }) {
@@ -99,6 +99,16 @@ export default function Nav({ active, onNav }) {
                   <span style={{ fontSize: 13, letterSpacing: 0.5 }}>Festival Rainha Terê</span>
                   <span style={{ fontSize: 10, color: COLORS.gray, letterSpacing: 1, textTransform: 'uppercase' }}>Festival · 2024–2025</span>
                 </Link>
+                <div style={{ height: 1, background: COLORS.grayDark, margin: '4px 12px' }} />
+                <Link href="/espetaculos/batuque" onClick={() => setDropdownOpen(false)} style={{
+                  display: 'flex', flexDirection: 'column', gap: 3,
+                  textDecoration: 'none', padding: '12px 20px',
+                  color: pathname === '/espetaculos/batuque' ? COLORS_BATUQUE.golden : COLORS.cream,
+                  fontFamily: "'DM Sans', sans-serif",
+                }}>
+                  <span style={{ fontSize: 13, letterSpacing: 0.5 }}>Feira Criativa Batuquê</span>
+                  <span style={{ fontSize: 10, color: COLORS.gray, letterSpacing: 1, textTransform: 'uppercase' }}>Feira Criativa</span>
+                </Link>
               </div>
             )}
           </div>
@@ -156,6 +166,11 @@ export default function Nav({ active, onNav }) {
                   fontFamily: "'DM Sans', sans-serif", fontSize: 13,
                   color: pathname === '/espetaculos/rainha-tere' ? COLORS_TERE.yellow : COLORS.gray,
                 }}>→ Festival Rainha Terê</Link>
+                <Link href="/espetaculos/batuque" onClick={() => { setMenuOpen(false); setMobileShowsOpen(false) }} style={{
+                  textDecoration: 'none',
+                  fontFamily: "'DM Sans', sans-serif", fontSize: 13,
+                  color: pathname === '/espetaculos/batuque' ? COLORS_BATUQUE.golden : COLORS.gray,
+                }}>→ Feira Criativa Batuquê</Link>
               </div>
             )}
           </div>
