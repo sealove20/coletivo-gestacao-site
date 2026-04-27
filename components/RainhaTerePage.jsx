@@ -49,7 +49,7 @@ export default function RainhaTerePage() {
         {/* Back button */}
         <Link href="/" style={{
           position: 'absolute', top: 90, left: 'clamp(20px, 4vw, 60px)',
-          fontFamily: "'DM Sans', sans-serif", fontSize: 12, letterSpacing: 2,
+          fontFamily: "'Nourd', sans-serif", fontSize: 12, letterSpacing: 2,
           textTransform: 'uppercase', color: COLORS_TERE.gray,
           display: 'flex', alignItems: 'center', gap: 8,
           textDecoration: 'none', transition: 'color 0.2s',
@@ -70,11 +70,11 @@ export default function RainhaTerePage() {
           </div>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 16, marginBottom: 20 }}>
             <div style={{ width: 50, height: 1, background: `linear-gradient(90deg, transparent, ${COLORS_TERE.yellow})` }} />
-            <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 11, letterSpacing: 4, textTransform: 'uppercase', color: COLORS_TERE.yellow }}>Rondonópolis · MT</span>
+            <span style={{ fontFamily: "'Nourd', sans-serif", fontSize: 11, letterSpacing: 4, textTransform: 'uppercase', color: COLORS_TERE.yellow }}>Rondonópolis · MT</span>
             <div style={{ width: 50, height: 1, background: `linear-gradient(90deg, ${COLORS_TERE.yellow}, transparent)` }} />
           </div>
           <h1 style={{
-            fontFamily: "'Bebas Neue', 'Barlow Condensed', 'DM Sans', sans-serif",
+            fontFamily: "'Garet', sans-serif",
             fontSize: 'clamp(52px, 12vw, 120px)', fontWeight: 700,
             color: COLORS_TERE.cream, lineHeight: 0.9, margin: '0 0 16px', letterSpacing: 2,
           }}>
@@ -82,7 +82,7 @@ export default function RainhaTerePage() {
             <span style={{ color: COLORS_TERE.yellow }}>Rainha Terê</span>
           </h1>
           <p style={{
-            fontFamily: "'DM Sans', sans-serif", fontSize: 'clamp(13px, 1.5vw, 16px)',
+            fontFamily: "'Nourd', sans-serif", fontSize: 'clamp(13px, 1.5vw, 16px)',
             color: COLORS_TERE.gray, letterSpacing: 3, textTransform: 'uppercase',
             margin: '0 auto 40px',
           }}>
@@ -91,7 +91,7 @@ export default function RainhaTerePage() {
           <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
             {['2024', '2025', '2026'].map(y => (
               <span key={y} style={{
-                fontFamily: "'Bebas Neue', 'Barlow Condensed', sans-serif",
+                fontFamily: "'Garet', sans-serif",
                 fontSize: 20, letterSpacing: 3,
                 border: `1px solid ${COLORS_TERE.yellow}66`,
                 color: COLORS_TERE.yellow, padding: '6px 20px',
@@ -118,14 +118,14 @@ export default function RainhaTerePage() {
                 <TereArrow width={52} />
               </div>
               <h2 style={{
-                fontFamily: "'Bebas Neue', 'Barlow Condensed', sans-serif",
+                fontFamily: "'Garet', sans-serif",
                 fontSize: 'clamp(32px, 5vw, 48px)', color: COLORS_TERE.cream,
                 letterSpacing: 2, margin: '0 0 20px',
               }}>Sobre o Festival</h2>
-              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, color: COLORS_TERE.gray, lineHeight: 1.8 }}>
+              <p style={{ fontFamily: "'Nourd', sans-serif", fontSize: 15, color: COLORS_TERE.gray, lineHeight: 1.8 }}>
                 O Festival de Teatro Rainha Terê é uma iniciativa do Coletivo Gestação que celebra a cena teatral negra mato-grossense. Com o tema "Mato Grosso Negro: Quem Somos?", o festival reúne grupos e coletivos de teatro negro para compartilhar experiências, processos criativos e perspectivas afrocentradas.
               </p>
-              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, color: COLORS_TERE.gray, lineHeight: 1.8, marginTop: 16 }}>
+              <p style={{ fontFamily: "'Nourd', sans-serif", fontSize: 15, color: COLORS_TERE.gray, lineHeight: 1.8, marginTop: 16 }}>
                 Realizado em Rondonópolis, MT, o festival se propõe a ser um espaço de encontro, formação e afirmação da identidade negra no teatro regional.
               </p>
             </div>
@@ -145,8 +145,8 @@ export default function RainhaTerePage() {
                   transform: inView ? 'translateX(0)' : 'translateX(20px)',
                   transition: `all 0.6s ease ${0.1 + i * 0.08}s`,
                 }}>
-                  <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 10, color: COLORS_TERE.yellow, letterSpacing: 2, textTransform: 'uppercase' }}>{label}</span>
-                  <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, color: COLORS_TERE.cream, margin: '4px 0 0' }}>{value}</p>
+                  <span style={{ fontFamily: "'Nourd', sans-serif", fontSize: 10, color: COLORS_TERE.yellow, letterSpacing: 2, textTransform: 'uppercase' }}>{label}</span>
+                  <p style={{ fontFamily: "'Nourd', sans-serif", fontSize: 15, color: COLORS_TERE.cream, margin: '4px 0 0' }}>{value}</p>
                 </div>
               ))}
             </div>
@@ -164,10 +164,10 @@ export default function RainhaTerePage() {
         <div style={{ maxWidth: 1000, margin: '0 auto' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 48 }}>
             <div style={{ width: 40, height: 1, background: COLORS_TERE.yellow }} />
-            <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 11, letterSpacing: 4, textTransform: 'uppercase', color: COLORS_TERE.yellow }}>Histórico</span>
+            <span style={{ fontFamily: "'Nourd', sans-serif", fontSize: 11, letterSpacing: 4, textTransform: 'uppercase', color: COLORS_TERE.yellow }}>Histórico</span>
           </div>
           <h2 style={{
-            fontFamily: "'Bebas Neue', 'Barlow Condensed', sans-serif",
+            fontFamily: "'Garet', sans-serif",
             fontSize: 'clamp(36px, 6vw, 60px)', color: COLORS_TERE.cream,
             letterSpacing: 2, margin: '0 0 48px',
           }}>Edições</h2>
@@ -188,13 +188,13 @@ export default function RainhaTerePage() {
                 </div>
                 <div style={{ position: 'relative', zIndex: 1 }}>
                   <h3 style={{
-                    fontFamily: "'Bebas Neue', 'Barlow Condensed', sans-serif",
+                    fontFamily: "'Garet', sans-serif",
                     fontSize: 'clamp(64px, 10vw, 96px)', color: COLORS_TERE.yellow,
                     lineHeight: 1, margin: '0 0 4px', letterSpacing: 2,
                   }}>{ed.year}</h3>
-                  <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 12, color: COLORS_TERE.gray, letterSpacing: 2, textTransform: 'uppercase', margin: '0 0 20px' }}>{ed.subtitle} · {ed.info}</p>
+                  <p style={{ fontFamily: "'Nourd', sans-serif", fontSize: 12, color: COLORS_TERE.gray, letterSpacing: 2, textTransform: 'uppercase', margin: '0 0 20px' }}>{ed.subtitle} · {ed.info}</p>
                   <div style={{ height: 1, background: COLORS_TERE.grayDark, marginBottom: 20 }} />
-                  <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, color: COLORS_TERE.gray, lineHeight: 1.7 }}>
+                  <p style={{ fontFamily: "'Nourd', sans-serif", fontSize: 14, color: COLORS_TERE.gray, lineHeight: 1.7 }}>
                     Informações sobre a edição em breve.
                   </p>
                 </div>
@@ -209,21 +209,21 @@ export default function RainhaTerePage() {
         <div style={{ maxWidth: 1000, margin: '0 auto', textAlign: 'center' }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 16, marginBottom: 16 }}>
             <TereArrow width={36} />
-            <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 11, letterSpacing: 4, textTransform: 'uppercase', color: COLORS_TERE.yellow }}>Programação</span>
+            <span style={{ fontFamily: "'Nourd', sans-serif", fontSize: 11, letterSpacing: 4, textTransform: 'uppercase', color: COLORS_TERE.yellow }}>Programação</span>
             <TereArrow width={36} color={COLORS_TERE.olive} />
           </div>
           <h2 style={{
-            fontFamily: "'Bebas Neue', 'Barlow Condensed', sans-serif",
+            fontFamily: "'Garet', sans-serif",
             fontSize: 'clamp(36px, 6vw, 60px)', color: COLORS_TERE.cream,
             letterSpacing: 2, margin: '0 0 16px',
           }}>Espetáculos Convidados</h2>
-          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, color: COLORS_TERE.gray, marginBottom: 48 }}>
+          <p style={{ fontFamily: "'Nourd', sans-serif", fontSize: 15, color: COLORS_TERE.gray, marginBottom: 48 }}>
             Programação da próxima edição em breve.
           </p>
           <div style={{
             border: `1px dashed ${COLORS_TERE.yellow}33`,
             padding: 'clamp(40px, 6vw, 80px)', color: COLORS_TERE.gray,
-            fontFamily: "'DM Sans', sans-serif", fontSize: 13, letterSpacing: 2,
+            fontFamily: "'Nourd', sans-serif", fontSize: 13, letterSpacing: 2,
             textTransform: 'uppercase',
           }}>
             Em breve
