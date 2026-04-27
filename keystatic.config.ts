@@ -14,7 +14,7 @@ export default config({
     posts: collection({
       label: "Posts do Blog",
       slugField: "title",
-      path: "content/posts/*",
+      path: "content/posts/*/",
       format: { contentField: "content" },
       schema: {
         title: fields.slug({ name: { label: "Título" } }),
@@ -24,7 +24,15 @@ export default config({
         author: fields.text({ label: "Autora" }),
         date: fields.text({ label: "Data" }),
         readTime: fields.text({ label: "Tempo de Leitura" }),
-        content: fields.markdoc({ label: "Conteúdo" }),
+        content: fields.markdoc({
+          label: "Conteúdo",
+          options: {
+            image: {
+              directory: "public/images/posts",
+              publicPath: "/images/posts/",
+            },
+          },
+        }),
       },
     }),
   },
