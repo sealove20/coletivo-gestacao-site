@@ -2,12 +2,13 @@
 
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { COLORS, COLORS_TERE, COLORS_BATUQUE } from '@/lib/constants'
 import { AdinkraSymbol } from '@/components/Shared'
 
 export default function Nav({ active, onNav }) {
   const pathname = usePathname()
+  const router = useRouter()
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const [dropdownOpen, setDropdownOpen] = useState(false)
@@ -19,6 +20,14 @@ export default function Nav({ active, onNav }) {
     window.addEventListener('scroll', h)
     return () => window.removeEventListener('scroll', h)
   }, [])
+
+  const handleNav = (id) => {
+    if (pathname === '/') {
+      onNav(id)
+    } else {
+      router.push(`/#${id}`)
+    }
+  }
 
   const labels = { home: 'Home', coletivo: 'O Coletivo', imprensa: 'Imprensa', blog: 'Blog', contato: 'Contato' }
   const isEspetaculosActive = pathname.startsWith('/espetaculos')
@@ -41,7 +50,7 @@ export default function Nav({ active, onNav }) {
       transition: 'all 0.5s ease', padding: '0 clamp(20px, 4vw, 60px)',
     }}>
       <div style={{ maxWidth: 1200, margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 70 }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 12, cursor: 'pointer' }} onClick={() => onNav('home')}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12, cursor: 'pointer' }} onClick={() => handleNav('home')}>
           <AdinkraSymbol size={32} color={COLORS.gold} />
           <span style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 18, color: COLORS.cream, fontWeight: 700, letterSpacing: 1 }}>
             COLETIVO GESTAÇÃO
@@ -50,8 +59,8 @@ export default function Nav({ active, onNav }) {
 
         {/* Desktop menu */}
         <div style={{ display: 'flex', gap: 28, alignItems: 'center' }} className="desktop-nav">
-          <button style={navBtnStyle('home')} onClick={() => onNav('home')}>Home</button>
-          <button style={navBtnStyle('coletivo')} onClick={() => onNav('coletivo')}>O Coletivo</button>
+          <button style={navBtnStyle('home')} onClick={() => handleNav('home')}>Home</button>
+          <button style={navBtnStyle('coletivo')} onClick={() => handleNav('coletivo')}>O Coletivo</button>
 
           {/* Espetáculos dropdown */}
           <div style={{ position: 'relative' }}
@@ -113,9 +122,9 @@ export default function Nav({ active, onNav }) {
             )}
           </div>
 
-          <button style={navBtnStyle('imprensa')} onClick={() => onNav('imprensa')}>Imprensa</button>
-          <button style={navBtnStyle('blog')} onClick={() => onNav('blog')}>Blog</button>
-          <button style={navBtnStyle('contato')} onClick={() => onNav('contato')}>Contato</button>
+          <button style={navBtnStyle('imprensa')} onClick={() => handleNav('imprensa')}>Imprensa</button>
+          <button style={navBtnStyle('blog')} onClick={() => handleNav('blog')}>Blog</button>
+          <button style={navBtnStyle('contato')} onClick={() => handleNav('contato')}>Contato</button>
         </div>
 
         {/* Mobile hamburger */}
@@ -137,7 +146,7 @@ export default function Nav({ active, onNav }) {
           borderBottom: `1px solid ${COLORS.grayDark}`, zIndex: 150,
         }}>
           {['home', 'coletivo'].map(s => (
-            <button key={s} onClick={() => { onNav(s); setMenuOpen(false) }} style={{
+            <button key={s} onClick={() => { handleNav(s); setMenuOpen(false) }} style={{
               background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left',
               fontFamily: "'DM Sans', sans-serif", fontSize: 14, letterSpacing: 1.5,
               textTransform: 'uppercase', color: active === s ? COLORS.gold : COLORS.cream,
@@ -175,7 +184,7 @@ export default function Nav({ active, onNav }) {
             )}
           </div>
           {['imprensa', 'blog', 'contato'].map(s => (
-            <button key={s} onClick={() => { onNav(s); setMenuOpen(false) }} style={{
+            <button key={s} onClick={() => { handleNav(s); setMenuOpen(false) }} style={{
               background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left',
               fontFamily: "'DM Sans', sans-serif", fontSize: 14, letterSpacing: 1.5,
               textTransform: 'uppercase', color: active === s ? COLORS.gold : COLORS.cream,

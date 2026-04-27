@@ -629,6 +629,13 @@ export default function HomePage() {
   }
 
   useEffect(() => {
+    const hash = window.location.hash.slice(1)
+    if (hash && SECTIONS.includes(hash)) {
+      setTimeout(() => scrollTo(hash), 100)
+    }
+  }, [])
+
+  useEffect(() => {
     const handler = () => {
       for (const s of [...SECTIONS].reverse()) {
         const el = document.getElementById(s)
