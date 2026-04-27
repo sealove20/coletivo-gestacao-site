@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import { Playfair_Display, DM_Sans, Bebas_Neue, Barlow_Condensed, Open_Sans } from 'next/font/google'
 import './globals.css'
 
@@ -39,7 +40,12 @@ const openSans = Open_Sans({
   variable: '--font-open-sans',
 })
 
-export default function RootLayout({ children }) {
+export const metadata: Metadata = {
+  title: 'Coletivo Gestação',
+  description: 'Coletivo Afroperspectivista de Teatro. Rondonópolis, Mato Grosso.',
+}
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
       lang="pt-BR"

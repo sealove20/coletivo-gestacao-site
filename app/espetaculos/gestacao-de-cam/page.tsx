@@ -1,6 +1,7 @@
+import type { Metadata } from 'next'
 import GestacaoDeCamPage from '@/components/GestacaoDeCamPage'
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Gestação de Cam — Coletivo Gestação',
   description: 'Espetáculo de teatro negro sobre memória, ancestralidade e experiências de mulheres negras. Premiado em festivais nacionais.',
   openGraph: {

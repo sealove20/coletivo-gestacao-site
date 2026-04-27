@@ -48,7 +48,7 @@ export default function GestacaoDeCamPage() {
       {/* Content */}
       <div style={{ padding: 'clamp(60px, 8vw, 100px) clamp(20px, 4vw, 60px)' }}>
         <div style={{ maxWidth: 1000, margin: '0 auto' }}>
-          <div ref={ref}>
+          <div ref={ref as React.RefObject<HTMLDivElement | null>}>
             {/* Hero image placeholder */}
             <div style={{
               width: '100%', height: 'clamp(250px, 40vw, 450px)',
@@ -102,7 +102,7 @@ export default function GestacaoDeCamPage() {
                   fontFamily: "'DM Sans', sans-serif", fontSize: 11, letterSpacing: 3,
                   textTransform: 'uppercase', color: COLORS.gold, marginBottom: 20, marginTop: 0,
                 }}>Ficha Técnica</h4>
-                {[
+                {([
                   ['Direção', 'Coletiva'],
                   ['Dramaturgia', 'Camila Zenzele Pinho'],
                   ['Elenco', 'Camila Zenzele Pinho, Larissa Fernanda de Andrade, Sara Alves Timótheo'],
@@ -110,7 +110,7 @@ export default function GestacaoDeCamPage() {
                   ['Trilha Sonora', 'Nega Lu'],
                   ['Percussão', 'Moisés Ferreira'],
                   ['Figurino / Iluminação', 'Ricardo Almeida'],
-                ].map(([label, value], i) => (
+                ] as [string, string][]).map(([label, value], i) => (
                   <div key={i} style={{ marginBottom: 12 }}>
                     <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 11, color: COLORS.gray, textTransform: 'uppercase', letterSpacing: 1 }}>{label}</span>
                     <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, color: COLORS.cream, margin: '2px 0 0' }}>{value}</p>
@@ -122,14 +122,14 @@ export default function GestacaoDeCamPage() {
                   fontFamily: "'DM Sans', sans-serif", fontSize: 11, letterSpacing: 3,
                   textTransform: 'uppercase', color: COLORS.gold, marginBottom: 20, marginTop: 0,
                 }}>Informações Técnicas</h4>
-                {[
+                {([
                   ['Duração', '50 minutos'],
                   ['Classificação', '12+'],
                   ['Montagem', '3 horas'],
                   ['Idioma', 'Português'],
                   ['Campo Artístico', 'Teatro / Performance / Música'],
                   ['Tipo', 'Ensemble'],
-                ].map(([label, value], i) => (
+                ] as [string, string][]).map(([label, value], i) => (
                   <div key={i} style={{
                     display: 'flex', justifyContent: 'space-between', alignItems: 'baseline',
                     padding: '12px 0',

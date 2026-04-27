@@ -8,7 +8,7 @@ export const COLORS = {
   white: "#FAFAFA",
   gray: "#888888",
   grayDark: "#333333",
-};
+} as const;
 
 export const COLORS_TERE = {
   bg: "#1C2A0A",
@@ -24,7 +24,7 @@ export const COLORS_TERE = {
   white: "#FAFAFA",
   gray: "#8A8A6A",
   grayDark: "#2E3D12",
-};
+} as const;
 
 export const COLORS_BATUQUE = {
   bg: "#201F22",
@@ -39,6 +39,14 @@ export const COLORS_BATUQUE = {
   white: "#FAFAFA",
   gray: "#8A8A8A",
   grayDark: "#3A383F",
-};
+} as const;
 
-export const SECTIONS = ["home", "coletivo", "imprensa", "blog", "contato"];
+export const SECTIONS = [
+  "home",
+  "coletivo",
+  "imprensa",
+  "blog",
+  "contato",
+] as const;
+
+export type Section = (typeof SECTIONS)[number];

@@ -6,14 +6,19 @@ import { usePathname, useRouter } from 'next/navigation'
 import { COLORS, COLORS_TERE, COLORS_BATUQUE } from '@/lib/constants'
 import { AdinkraSymbol } from '@/components/Shared'
 
-export default function Nav({ active, onNav }) {
+interface NavProps {
+  active: string
+  onNav: (id: string) => void
+}
+
+export default function Nav({ active, onNav }: NavProps) {
   const pathname = usePathname()
   const router = useRouter()
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const [mobileShowsOpen, setMobileShowsOpen] = useState(false)
-  const closeTimeoutRef = useRef(null)
+  const closeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   useEffect(() => {
     const h = () => setScrolled(window.scrollY > 60)
@@ -21,7 +26,7 @@ export default function Nav({ active, onNav }) {
     return () => window.removeEventListener('scroll', h)
   }, [])
 
-  const handleNav = (id) => {
+  const handleNav = (id: string) => {
     if (pathname === '/') {
       onNav(id)
     } else {
@@ -29,12 +34,12 @@ export default function Nav({ active, onNav }) {
     }
   }
 
-  const labels = { home: 'Home', coletivo: 'O Coletivo', imprensa: 'Imprensa', blog: 'Blog', contato: 'Contato' }
+  const labels: Record<string, string> = { home: 'Home', coletivo: 'O Coletivo', imprensa: 'Imprensa', blog: 'Blog', contato: 'Contato' }
   const isEspetaculosActive = pathname === '/espetaculos/gestacao-de-cam'
   const isRainhaActive = pathname === '/espetaculos/rainha-tere'
   const isBatuqueActive = pathname === '/espetaculos/batuque'
 
-  const navBtnStyle = (s) => ({
+  const navBtnStyle = (s: string): React.CSSProperties => ({
     background: 'none', border: 'none', cursor: 'pointer',
     fontFamily: "'DM Sans', sans-serif", fontSize: 13, letterSpacing: 1.5,
     textTransform: 'uppercase',
@@ -66,7 +71,7 @@ export default function Nav({ active, onNav }) {
 
           {/* Espetáculos dropdown */}
           <div style={{ position: 'relative' }}
-            onMouseEnter={() => { clearTimeout(closeTimeoutRef.current); setDropdownOpen(true) }}
+            onMouseEnter={() => { if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current); setDropdownOpen(true) }}
             onMouseLeave={() => { closeTimeoutRef.current = setTimeout(() => setDropdownOpen(false), 150) }}>
             <button style={{
               ...navBtnStyle('_espetaculos'),
@@ -141,7 +146,7 @@ export default function Nav({ active, onNav }) {
           padding: '20px 30px', display: 'flex', flexDirection: 'column', gap: 16,
           borderBottom: `1px solid ${COLORS.grayDark}`, zIndex: 150,
         }}>
-          {['home', 'coletivo'].map(s => (
+          {(['home', 'coletivo'] as const).map(s => (
             <button key={s} onClick={() => { handleNav(s); setMenuOpen(false) }} style={{
               background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left',
               fontFamily: "'DM Sans', sans-serif", fontSize: 14, letterSpacing: 1.5,
@@ -181,7 +186,7 @@ export default function Nav({ active, onNav }) {
             textTransform: 'uppercase',
             color: isBatuqueActive ? COLORS_BATUQUE.golden : COLORS.cream,
           }}>Batuquê</Link>
-          {['imprensa', 'blog', 'contato'].map(s => (
+          {(['imprensa', 'blog', 'contato'] as const).map(s => (
             <button key={s} onClick={() => { handleNav(s); setMenuOpen(false) }} style={{
               background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left',
               fontFamily: "'DM Sans', sans-serif", fontSize: 14, letterSpacing: 1.5,

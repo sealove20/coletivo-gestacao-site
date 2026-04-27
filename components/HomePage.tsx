@@ -6,7 +6,56 @@ import { COLORS, SECTIONS } from '@/lib/constants'
 import { useInView, AdinkraSymbol, StarDecor, SectionTitle } from '@/components/Shared'
 import Nav from '@/components/Nav'
 
-function Home({ onNav }) {
+interface BlogPost {
+  id: number
+  category: string
+  tag: string
+  title: string
+  excerpt: string
+  author: string
+  date: string
+  readTime: string
+  content: string[]
+}
+
+interface CastMember {
+  name: string
+  role: string
+  desc: string
+}
+
+interface TeamMember {
+  name: string
+  roles: string
+}
+
+interface MediaItem {
+  source: string
+  title: string
+  year: string
+}
+
+interface ContactItem {
+  icon: string
+  label: string
+  value: string
+  href: string
+}
+
+interface BlogCardProps {
+  post: BlogPost
+  featured?: boolean
+  inView: boolean
+  delay?: number
+  onClick: () => void
+}
+
+interface BlogModalProps {
+  post: BlogPost
+  onClose: () => void
+}
+
+function Home({ onNav }: { onNav: (id: string) => void }) {
   const [loaded, setLoaded] = useState(false)
   useEffect(() => { setTimeout(() => setLoaded(true), 100) }, [])
   return (
@@ -122,11 +171,16 @@ function Home({ onNav }) {
 
 function Coletivo() {
   const [ref, inView] = useInView()
-  const cast = [
+  const cast: CastMember[] = [
     { name: 'Camila Zenzele Pinho', role: 'Dramaturga, Atriz, Produtora', desc: 'Psicóloga e Mestre em Educação. Criadora e idealizadora do Coletivo Gestação.' },
     { name: 'Larissa Fernanda de Andrade', role: 'Atriz e Performer', desc: 'Integrante do elenco de Gestação de Cam.' },
     { name: 'Sara Alves Timótheo', role: 'Atriz e Performer', desc: 'Integrante do elenco de Gestação de Cam.' },
     { name: 'Alice Lucas', role: 'Atriz Convidada', desc: 'Participação especial no espetáculo.' },
+  ]
+  const team: TeamMember[] = [
+    { name: 'Ricardo Almeida', roles: 'Figurino · Maquiagem · Iluminação' },
+    { name: 'Nega Lu', roles: 'Composição Musical Original' },
+    { name: 'Moisés Ferreira', roles: 'Percussão' },
   ]
   return (
     <section id="coletivo" style={{
@@ -135,7 +189,7 @@ function Coletivo() {
     }}>
       <div style={{ maxWidth: 1000, margin: '0 auto' }}>
         <SectionTitle title="O Coletivo" subtitle="Quem Somos" />
-        <div ref={ref} style={{
+        <div ref={ref as React.RefObject<HTMLDivElement | null>} style={{
           display: 'grid', gridTemplateColumns: '1fr', gap: 40,
           opacity: inView ? 1 : 0, transform: inView ? 'translateY(0)' : 'translateY(30px)',
           transition: 'all 0.8s ease 0.2s',
@@ -200,11 +254,7 @@ function Coletivo() {
             display: 'flex', flexWrap: 'wrap', gap: 24,
             padding: '24px 0', borderTop: `1px solid ${COLORS.grayDark}`,
           }}>
-            {[
-              { name: 'Ricardo Almeida', roles: 'Figurino · Maquiagem · Iluminação' },
-              { name: 'Nega Lu', roles: 'Composição Musical Original' },
-              { name: 'Moisés Ferreira', roles: 'Percussão' },
-            ].map((t, i) => (
+            {team.map((t, i) => (
               <div key={i} style={{ flex: '1 1 200px' }}>
                 <p style={{ fontFamily: "'Playfair Display', serif", fontSize: 15, color: COLORS.cream, margin: '0 0 4px' }}>{t.name}</p>
                 <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 12, color: COLORS.gray, margin: 0 }}>{t.roles}</p>
@@ -219,6 +269,10 @@ function Coletivo() {
 
 function Imprensa() {
   const [ref, inView] = useInView()
+  const media: MediaItem[] = [
+    { source: 'Notícia em Foco MT', title: "Gestação de CAM estreia nesta quarta, espetáculo contemplado na Lei Aldir Blanc", year: '2021' },
+    { source: 'Agora MT', title: "Espetáculo 'Gestação de Cam' estreia em formato online", year: '2021' },
+  ]
   return (
     <section id="imprensa" style={{
       padding: 'clamp(80px, 10vw, 120px) clamp(20px, 4vw, 60px)',
@@ -226,7 +280,7 @@ function Imprensa() {
     }}>
       <div style={{ maxWidth: 1000, margin: '0 auto' }}>
         <SectionTitle title="Imprensa" subtitle="Na Mídia" />
-        <div ref={ref} style={{
+        <div ref={ref as React.RefObject<HTMLDivElement | null>} style={{
           display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 20,
         }}>
           <div style={{
@@ -260,10 +314,7 @@ function Imprensa() {
             opacity: inView ? 1 : 0, transform: inView ? 'translateY(0)' : 'translateY(30px)',
             transition: 'all 0.8s ease 0.4s',
           }}>
-            {[
-              { source: 'Notícia em Foco MT', title: "Gestação de CAM estreia nesta quarta, espetáculo contemplado na Lei Aldir Blanc", year: '2021' },
-              { source: 'Agora MT', title: "Espetáculo 'Gestação de Cam' estreia em formato online", year: '2021' },
-            ].map((m, i) => (
+            {media.map((m, i) => (
               <div key={i} style={{
                 background: COLORS.bg, border: `1px solid ${COLORS.grayDark}`,
                 padding: 24, cursor: 'pointer', transition: 'all 0.3s',
@@ -306,7 +357,7 @@ function Imprensa() {
   )
 }
 
-const BLOG_POSTS = [
+const BLOG_POSTS: BlogPost[] = [
   {
     id: 1,
     category: 'Reflexão',
@@ -389,11 +440,11 @@ const BLOG_POSTS = [
   },
 ]
 
-function BlogModal({ post, onClose }) {
+function BlogModal({ post, onClose }: BlogModalProps) {
   useEffect(() => {
     const prev = document.body.style.overflow
     document.body.style.overflow = 'hidden'
-    const onKey = (e) => { if (e.key === 'Escape') onClose() }
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose() }
     window.addEventListener('keydown', onKey)
     return () => {
       document.body.style.overflow = prev
@@ -483,7 +534,7 @@ function BlogModal({ post, onClose }) {
   )
 }
 
-function BlogCard({ post, featured = false, inView, delay = 0, onClick }) {
+function BlogCard({ post, featured = false, inView, delay = 0, onClick }: BlogCardProps) {
   const [hovered, setHovered] = useState(false)
   return (
     <div onClick={onClick} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} style={{
@@ -533,7 +584,7 @@ function BlogCard({ post, featured = false, inView, delay = 0, onClick }) {
 
 function Blog() {
   const [ref, inView] = useInView()
-  const [selectedPost, setSelectedPost] = useState(null)
+  const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null)
   const [featured, ...rest] = BLOG_POSTS
   return (
     <section id="blog" style={{
@@ -542,7 +593,7 @@ function Blog() {
     }}>
       <div style={{ maxWidth: 1000, margin: '0 auto' }}>
         <SectionTitle title="Blog" subtitle="Textos & Reflexões" />
-        <div ref={ref} style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+        <div ref={ref as React.RefObject<HTMLDivElement | null>} style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
           <BlogCard post={featured} featured inView={inView} delay={0.1} onClick={() => setSelectedPost(featured)} />
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 20 }}>
             {rest.map((post, i) => (
@@ -558,6 +609,11 @@ function Blog() {
 
 function Contato() {
   const [ref, inView] = useInView()
+  const contacts: ContactItem[] = [
+    { icon: '✉️', label: 'E-mail', value: 'gestacaoproducao@gmail.com', href: 'mailto:gestacaoproducao@gmail.com' },
+    { icon: '📱', label: 'WhatsApp', value: '+55 66 99244-3090', href: 'https://wa.me/5566992443090' },
+    { icon: '📸', label: 'Instagram', value: '@coletivogestacao', href: 'https://instagram.com/coletivogestacao' },
+  ]
   return (
     <section id="contato" style={{
       padding: 'clamp(80px, 10vw, 120px) clamp(20px, 4vw, 60px)',
@@ -571,16 +627,12 @@ function Contato() {
         }}>
           Quer levar <em style={{ color: COLORS.cream }}>Gestação de Cam</em> para seu festival, teatro ou espaço cultural? Entre em contato!
         </p>
-        <div ref={ref} style={{
+        <div ref={ref as React.RefObject<HTMLDivElement | null>} style={{
           display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 20,
           opacity: inView ? 1 : 0, transform: inView ? 'translateY(0)' : 'translateY(20px)',
           transition: 'all 0.8s ease 0.2s',
         }}>
-          {[
-            { icon: '✉️', label: 'E-mail', value: 'gestacaoproducao@gmail.com', href: 'mailto:gestacaoproducao@gmail.com' },
-            { icon: '📱', label: 'WhatsApp', value: '+55 66 99244-3090', href: 'https://wa.me/5566992443090' },
-            { icon: '📸', label: 'Instagram', value: '@coletivogestacao', href: 'https://instagram.com/coletivogestacao' },
-          ].map((c, i) => (
+          {contacts.map((c, i) => (
             <a key={i} href={c.href} target="_blank" rel="noopener noreferrer" style={{
               textDecoration: 'none',
               background: COLORS.bgAlt, border: `1px solid ${COLORS.grayDark}`,
@@ -623,14 +675,14 @@ function Footer() {
 export default function HomePage() {
   const [active, setActive] = useState('home')
 
-  const scrollTo = (id) => {
+  const scrollTo = (id: string) => {
     const el = document.getElementById(id)
     if (el) { el.scrollIntoView({ behavior: 'smooth' }); setActive(id) }
   }
 
   useEffect(() => {
     const hash = window.location.hash.slice(1)
-    if (hash && SECTIONS.includes(hash)) {
+    if (hash && (SECTIONS as readonly string[]).includes(hash)) {
       setTimeout(() => scrollTo(hash), 100)
     }
   }, [])

@@ -6,13 +6,23 @@ import { COLORS_TERE } from '@/lib/constants'
 import { useInView } from '@/components/Shared'
 import Nav from '@/components/Nav'
 
-const TereArrow = ({ color = COLORS_TERE.yellow, width = 48 }) => (
+interface TereArrowProps {
+  color?: string
+  width?: number
+}
+
+const TereArrow = ({ color = COLORS_TERE.yellow, width = 48 }: TereArrowProps) => (
   <svg width={width} height={width * 0.6} viewBox="0 0 80 48" fill={color}>
     <polygon points="0,13 46,13 46,0 80,24 46,48 46,35 0,35" />
   </svg>
 )
 
-const TereLogoSVG = ({ size = 160, spin = false }) => (
+interface TereLogoSVGProps {
+  size?: number
+  spin?: boolean
+}
+
+const TereLogoSVG = ({ size = 160, spin = false }: TereLogoSVGProps) => (
   <svg width={size} height={size} viewBox="0 0 200 200">
     <circle cx="100" cy="100" r="96" fill={COLORS_TERE.goldenLight} />
     <polygon
@@ -32,7 +42,7 @@ export default function RainhaTerePage() {
   const [ref, inView] = useInView()
   const [loaded, setLoaded] = useState(false)
   useEffect(() => { setTimeout(() => setLoaded(true), 80) }, [])
-  const stripes = [COLORS_TERE.red, COLORS_TERE.olive, COLORS_TERE.yellow, COLORS_TERE.peach, COLORS_TERE.golden, COLORS_TERE.olive, COLORS_TERE.red]
+  const stripes: string[] = [COLORS_TERE.red, COLORS_TERE.olive, COLORS_TERE.yellow, COLORS_TERE.peach, COLORS_TERE.golden, COLORS_TERE.olive, COLORS_TERE.red]
 
   return (
     <div style={{ background: COLORS_TERE.bg, minHeight: '100vh', color: COLORS_TERE.cream }}>
@@ -107,7 +117,7 @@ export default function RainhaTerePage() {
 
       {/* Sobre o Festival */}
       <section style={{ padding: 'clamp(70px, 10vw, 100px) clamp(20px, 4vw, 60px)' }}>
-        <div style={{ maxWidth: 1000, margin: '0 auto' }} ref={ref}>
+        <div style={{ maxWidth: 1000, margin: '0 auto' }} ref={ref as React.RefObject<HTMLDivElement | null>}>
           <div style={{
             display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 60,
             opacity: inView ? 1 : 0, transform: inView ? 'translateY(0)' : 'translateY(30px)',
@@ -130,13 +140,13 @@ export default function RainhaTerePage() {
               </p>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
-              {[
+              {([
                 ['Local', 'Rondonópolis, Mato Grosso'],
                 ['Organização', 'Coletivo Gestação'],
                 ['Edições', '2024 · 2025 · 2026'],
                 ['Instagram', '@festivalrainhatere'],
                 ['Realização', 'Viver Cultura · SECEL · Governo de MT'],
-              ].map(([label, value], i) => (
+              ] as [string, string][]).map(([label, value], i) => (
                 <div key={i} style={{
                   padding: '16px 20px',
                   background: COLORS_TERE.bgCard,

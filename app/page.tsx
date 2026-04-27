@@ -1,6 +1,7 @@
+import type { Metadata } from 'next'
 import HomePage from '@/components/HomePage'
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Coletivo Gestação — Teatro Negro | Rondonópolis MT',
   description: 'Coletivo Afroperspectivista de Teatro. Espetáculo Gestação de Cam — teatro negro, memória e ancestralidade. Rondonópolis, Mato Grosso.',
   openGraph: {

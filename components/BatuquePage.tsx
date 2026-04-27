@@ -7,9 +7,13 @@ import { useInView } from '@/components/Shared'
 import Nav from '@/components/Nav'
 
 const C = COLORS_BATUQUE
-const stripes = [C.golden, C.red, C.olive, C.blue, C.golden]
+const stripes: string[] = [C.golden, C.red, C.olive, C.blue, C.golden]
 
-const DrumSVG = ({ size = 140 }) => (
+interface DrumSVGProps {
+  size?: number
+}
+
+const DrumSVG = ({ size = 140 }: DrumSVGProps) => (
   <svg width={size} height={Math.round(size * 0.8)} viewBox="0 0 140 112">
     <rect x="5" y="32" width="130" height="46" fill={C.golden} />
     {Array.from({ length: 13 }, (_, i) => (
@@ -28,12 +32,17 @@ const DrumSVG = ({ size = 140 }) => (
   </svg>
 )
 
-const WaveSVG = ({ width = 80, color = C.golden }) => (
+interface WaveSVGProps {
+  width?: number
+  color?: string
+}
+
+const WaveSVG = ({ width = 80, color = C.golden }: WaveSVGProps) => (
   <svg width={width} height={Math.round(width * 0.49)} viewBox="0 0 90 44">
-    {[
+    {([
       [1, 14, 16], [12, 6, 28], [23, 0, 40], [34, 10, 20],
       [45, 16, 12], [56, 4, 32], [67, 8, 24], [78, 14, 16],
-    ].map(([x, y, h], i) => (
+    ] as [number, number, number][]).map(([x, y, h], i) => (
       <rect key={i} x={x} y={y} width={8} height={h} rx={4} fill={color} />
     ))}
   </svg>
@@ -123,7 +132,7 @@ export default function BatuquePage() {
 
       {/* Sobre */}
       <section style={{ padding: 'clamp(70px, 10vw, 100px) clamp(20px, 4vw, 60px)' }}>
-        <div style={{ maxWidth: 1000, margin: '0 auto' }} ref={ref1}>
+        <div style={{ maxWidth: 1000, margin: '0 auto' }} ref={ref1 as React.RefObject<HTMLDivElement | null>}>
           <div style={{
             display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 60,
             opacity: inView1 ? 1 : 0, transform: inView1 ? 'translateY(0)' : 'translateY(30px)',
@@ -146,12 +155,12 @@ export default function BatuquePage() {
               </p>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
-              {[
+              {([
                 ['Tipo', 'Feira Criativa'],
                 ['Local', 'Rondonópolis, Mato Grosso'],
                 ['Organização', 'Coletivo Gestação'],
                 ['Instagram', '@coletivogestacao'],
-              ].map(([label, value], i) => (
+              ] as [string, string][]).map(([label, value], i) => (
                 <div key={i} style={{
                   padding: '16px 20px',
                   background: C.bgCard,
@@ -176,7 +185,7 @@ export default function BatuquePage() {
 
       {/* Programação */}
       <section style={{ padding: 'clamp(70px, 10vw, 100px) clamp(20px, 4vw, 60px)', background: C.bgAlt }}>
-        <div style={{ maxWidth: 1000, margin: '0 auto' }} ref={ref2}>
+        <div style={{ maxWidth: 1000, margin: '0 auto' }} ref={ref2 as React.RefObject<HTMLDivElement | null>}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 16 }}>
             <div style={{ width: 40, height: 1, background: C.golden }} />
             <span style={{ fontFamily: "'Open Sans', sans-serif", fontSize: 11, letterSpacing: 4, textTransform: 'uppercase', color: C.golden }}>Programação</span>
