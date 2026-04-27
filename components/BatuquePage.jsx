@@ -76,7 +76,7 @@ export default function BatuquePage() {
 
         <Link href="/" style={{
           position: 'absolute', top: 90, left: 'clamp(20px, 4vw, 60px)',
-          fontFamily: "'DM Sans', sans-serif", fontSize: 12, letterSpacing: 2,
+          fontFamily: "'Open Sans', sans-serif", fontSize: 12, letterSpacing: 2,
           textTransform: 'uppercase', color: C.gray,
           display: 'flex', alignItems: 'center', gap: 8,
           textDecoration: 'none', transition: 'color 0.2s',
@@ -95,18 +95,18 @@ export default function BatuquePage() {
           </div>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 16, marginBottom: 16 }}>
             <div style={{ width: 50, height: 1, background: `linear-gradient(90deg, transparent, ${C.golden})` }} />
-            <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 11, letterSpacing: 4, textTransform: 'uppercase', color: C.golden }}>Feira Criativa</span>
+            <span style={{ fontFamily: "'Open Sans', sans-serif", fontSize: 11, letterSpacing: 4, textTransform: 'uppercase', color: C.golden }}>Feira Criativa</span>
             <div style={{ width: 50, height: 1, background: `linear-gradient(90deg, ${C.golden}, transparent)` }} />
           </div>
           <h1 style={{
-            fontFamily: "'Barlow Condensed', 'Bebas Neue', 'DM Sans', sans-serif",
+            fontFamily: "'Gulfs Display', sans-serif",
             fontSize: 'clamp(64px, 15vw, 148px)', fontWeight: 700,
             color: C.golden, lineHeight: 0.9, margin: '0 0 20px', letterSpacing: 6,
           }}>
             BATUQUÊ
           </h1>
           <p style={{
-            fontFamily: "'DM Sans', sans-serif", fontSize: 'clamp(12px, 1.4vw, 15px)',
+            fontFamily: "'Open Sans', sans-serif", fontSize: 'clamp(12px, 1.4vw, 15px)',
             color: C.gray, letterSpacing: 3, textTransform: 'uppercase', margin: '0 auto 36px',
           }}>
             Coletivo Gestação · Rondonópolis, MT
@@ -134,14 +134,14 @@ export default function BatuquePage() {
                 <WaveSVG width={70} />
               </div>
               <h2 style={{
-                fontFamily: "'Barlow Condensed', 'Bebas Neue', sans-serif",
+                fontFamily: "'Gulfs Display', sans-serif",
                 fontSize: 'clamp(32px, 5vw, 48px)', color: C.cream,
                 letterSpacing: 2, margin: '0 0 20px',
               }}>Sobre a Feira</h2>
-              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, color: C.gray, lineHeight: 1.8 }}>
+              <p style={{ fontFamily: "'Open Sans', sans-serif", fontSize: 15, color: C.gray, lineHeight: 1.8 }}>
                 A Feira Criativa Batuquê é uma iniciativa do Coletivo Gestação que celebra a cultura afro-brasileira por meio da arte, música e criatividade. Um encontro que pulsa como um batuque — cheio de energia, tradição e expressão negra.
               </p>
-              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, color: C.gray, lineHeight: 1.8, marginTop: 16 }}>
+              <p style={{ fontFamily: "'Open Sans', sans-serif", fontSize: 15, color: C.gray, lineHeight: 1.8, marginTop: 16 }}>
                 O evento reúne artistas, artesãos, músicos e criadores em Rondonópolis, MT, criando um espaço vivo de troca, afirmação identitária e celebração da cultura negra.
               </p>
             </div>
@@ -160,8 +160,8 @@ export default function BatuquePage() {
                   transform: inView1 ? 'translateX(0)' : 'translateX(20px)',
                   transition: `all 0.6s ease ${0.1 + i * 0.08}s`,
                 }}>
-                  <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 10, color: C.golden, letterSpacing: 2, textTransform: 'uppercase' }}>{label}</span>
-                  <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, color: C.cream, margin: '4px 0 0' }}>{value}</p>
+                  <span style={{ fontFamily: "'Open Sans', sans-serif", fontSize: 10, color: C.golden, letterSpacing: 2, textTransform: 'uppercase' }}>{label}</span>
+                  <p style={{ fontFamily: "'Open Sans', sans-serif", fontSize: 15, color: C.cream, margin: '4px 0 0' }}>{value}</p>
                 </div>
               ))}
             </div>
@@ -179,17 +179,17 @@ export default function BatuquePage() {
         <div style={{ maxWidth: 1000, margin: '0 auto' }} ref={ref2}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 16 }}>
             <div style={{ width: 40, height: 1, background: C.golden }} />
-            <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 11, letterSpacing: 4, textTransform: 'uppercase', color: C.golden }}>Programação</span>
+            <span style={{ fontFamily: "'Open Sans', sans-serif", fontSize: 11, letterSpacing: 4, textTransform: 'uppercase', color: C.golden }}>Programação</span>
           </div>
           <h2 style={{
-            fontFamily: "'Barlow Condensed', 'Bebas Neue', sans-serif",
+            fontFamily: "'Gulfs Display', sans-serif",
             fontSize: 'clamp(36px, 6vw, 60px)', color: C.cream,
             letterSpacing: 2, margin: '0 0 48px',
           }}>Edições e Atrações</h2>
           <div style={{
             border: `1px dashed ${C.golden}44`,
             padding: 'clamp(40px, 6vw, 80px)', color: C.gray,
-            fontFamily: "'DM Sans', sans-serif", fontSize: 13, letterSpacing: 2,
+            fontFamily: "'Open Sans', sans-serif", fontSize: 13, letterSpacing: 2,
             textTransform: 'uppercase', textAlign: 'center',
           }}>
             Em breve

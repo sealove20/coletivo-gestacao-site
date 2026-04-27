@@ -1,3 +1,11 @@
+@font-face {
+  font-family: 'Gulfs Display';
+  src: url('/fonts/gulfs-display-normal.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;

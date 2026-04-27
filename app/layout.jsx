@@ -1,4 +1,4 @@
-import { Playfair_Display, DM_Sans, Bebas_Neue, Barlow_Condensed } from 'next/font/google'
+import { Playfair_Display, DM_Sans, Bebas_Neue, Barlow_Condensed, Open_Sans } from 'next/font/google'
 import './globals.css'
 
 const playfair = Playfair_Display({
@@ -31,11 +31,19 @@ const barlowCondensed = Barlow_Condensed({
   variable: '--font-barlow',
 })
 
+const openSans = Open_Sans({
+  subsets: ['latin'],
+  weight: ['400', '600', '700'],
+  style: ['normal', 'italic'],
+  display: 'swap',
+  variable: '--font-open-sans',
+})
+
 export default function RootLayout({ children }) {
   return (
     <html
       lang="pt-BR"
-      className={`${playfair.variable} ${dmSans.variable} ${bebasNeue.variable} ${barlowCondensed.variable}`}
+      className={`${playfair.variable} ${dmSans.variable} ${bebasNeue.variable} ${barlowCondensed.variable} ${openSans.variable}`}
     >
       <body>{children}</body>
     </html>
