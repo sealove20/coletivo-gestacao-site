@@ -25,23 +25,19 @@ export default function GestacaoDeCamPage() {
           position: 'absolute', left: 'clamp(20px, 4vw, 60px)', top: 120, bottom: 0,
           width: 1, background: `linear-gradient(${COLORS.gold}00, ${COLORS.gold}33, ${COLORS.gold}00)`,
         }} />
-        <div style={{ maxWidth: 1000, margin: '0 auto' }}>
-          <Link href="/" style={{
-            background: 'none', border: 'none', cursor: 'pointer',
-            fontFamily: "'DM Sans', sans-serif", fontSize: 12, letterSpacing: 2,
-            textTransform: 'uppercase', color: COLORS.gray, marginBottom: 40,
-            display: 'flex', alignItems: 'center', gap: 8,
-            textDecoration: 'none', transition: 'color 0.2s',
-          }}
-            onMouseEnter={e => e.currentTarget.style.color = COLORS.gold}
-            onMouseLeave={e => e.currentTarget.style.color = COLORS.gray}
-          >
-            ← Voltar
-          </Link>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 16 }}>
-            <div style={{ width: 40, height: 1, background: COLORS.gold }} />
-            <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 11, letterSpacing: 4, textTransform: 'uppercase', color: COLORS.gold }}>Espetáculo</span>
-          </div>
+        <Link href="/" style={{
+          position: 'absolute', top: 90, left: 'clamp(20px, 4vw, 60px)',
+          fontFamily: "'DM Sans', sans-serif", fontSize: 12, letterSpacing: 2,
+          textTransform: 'uppercase', color: COLORS.gray,
+          display: 'flex', alignItems: 'center', gap: 8,
+          textDecoration: 'none', transition: 'color 0.2s',
+        }}
+          onMouseEnter={e => e.currentTarget.style.color = COLORS.gold}
+          onMouseLeave={e => e.currentTarget.style.color = COLORS.gray}
+        >
+          ← Voltar
+        </Link>
+        <div style={{ maxWidth: 1000, margin: '0 auto', textAlign: 'center' }}>
           <h1 style={{
             fontFamily: "'Playfair Display', Georgia, serif",
             fontSize: 'clamp(42px, 8vw, 80px)', fontWeight: 700,
