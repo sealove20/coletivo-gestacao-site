@@ -30,7 +30,9 @@ export default function Nav({ active, onNav }) {
   }
 
   const labels = { home: 'Home', coletivo: 'O Coletivo', imprensa: 'Imprensa', blog: 'Blog', contato: 'Contato' }
-  const isEspetaculosActive = pathname.startsWith('/espetaculos')
+  const isEspetaculosActive = pathname === '/espetaculos/gestacao-de-cam'
+  const isRainhaActive = pathname === '/espetaculos/rainha-tere'
+  const isBatuqueActive = pathname === '/espetaculos/batuque'
 
   const navBtnStyle = (s) => ({
     background: 'none', border: 'none', cursor: 'pointer',
@@ -98,30 +100,24 @@ export default function Nav({ active, onNav }) {
                   <span style={{ fontSize: 13, letterSpacing: 0.5 }}>Gestação de Cam</span>
                   <span style={{ fontSize: 10, color: COLORS.gray, letterSpacing: 1, textTransform: 'uppercase' }}>Teatro · 2021</span>
                 </Link>
-                <div style={{ height: 1, background: COLORS.grayDark, margin: '4px 12px' }} />
-                <Link href="/espetaculos/rainha-tere" onClick={() => setDropdownOpen(false)} style={{
-                  display: 'flex', flexDirection: 'column', gap: 3,
-                  textDecoration: 'none', padding: '12px 20px',
-                  color: pathname === '/espetaculos/rainha-tere' ? COLORS_TERE.yellow : COLORS.cream,
-                  fontFamily: "'DM Sans', sans-serif",
-                }}>
-                  <span style={{ fontSize: 13, letterSpacing: 0.5 }}>Festival Rainha Terê</span>
-                  <span style={{ fontSize: 10, color: COLORS.gray, letterSpacing: 1, textTransform: 'uppercase' }}>Festival · 2024–2025</span>
-                </Link>
-                <div style={{ height: 1, background: COLORS.grayDark, margin: '4px 12px' }} />
-                <Link href="/espetaculos/batuque" onClick={() => setDropdownOpen(false)} style={{
-                  display: 'flex', flexDirection: 'column', gap: 3,
-                  textDecoration: 'none', padding: '12px 20px',
-                  color: pathname === '/espetaculos/batuque' ? COLORS_BATUQUE.golden : COLORS.cream,
-                  fontFamily: "'DM Sans', sans-serif",
-                }}>
-                  <span style={{ fontSize: 13, letterSpacing: 0.5 }}>Feira Criativa Batuquê</span>
-                  <span style={{ fontSize: 10, color: COLORS.gray, letterSpacing: 1, textTransform: 'uppercase' }}>Feira Criativa</span>
-                </Link>
               </div>
             )}
           </div>
 
+          <Link href="/espetaculos/rainha-tere" style={{
+            fontFamily: "'DM Sans', sans-serif", fontSize: 13, letterSpacing: 1.5,
+            textTransform: 'uppercase', textDecoration: 'none',
+            color: isRainhaActive ? COLORS_TERE.yellow : COLORS.gray,
+            borderBottom: isRainhaActive ? `2px solid ${COLORS_TERE.yellow}` : '2px solid transparent',
+            paddingBottom: 4, transition: 'all 0.3s',
+          }}>Rainha Terê</Link>
+          <Link href="/espetaculos/batuque" style={{
+            fontFamily: "'DM Sans', sans-serif", fontSize: 13, letterSpacing: 1.5,
+            textTransform: 'uppercase', textDecoration: 'none',
+            color: isBatuqueActive ? COLORS_BATUQUE.golden : COLORS.gray,
+            borderBottom: isBatuqueActive ? `2px solid ${COLORS_BATUQUE.golden}` : '2px solid transparent',
+            paddingBottom: 4, transition: 'all 0.3s',
+          }}>Batuquê</Link>
           <button style={navBtnStyle('imprensa')} onClick={() => handleNav('imprensa')}>Imprensa</button>
           <button style={navBtnStyle('blog')} onClick={() => handleNav('blog')}>Blog</button>
           <button style={navBtnStyle('contato')} onClick={() => handleNav('contato')}>Contato</button>
@@ -170,19 +166,21 @@ export default function Nav({ active, onNav }) {
                   fontFamily: "'DM Sans', sans-serif", fontSize: 13,
                   color: pathname === '/espetaculos/gestacao-de-cam' ? COLORS.gold : COLORS.gray,
                 }}>→ Gestação de Cam</Link>
-                <Link href="/espetaculos/rainha-tere" onClick={() => { setMenuOpen(false); setMobileShowsOpen(false) }} style={{
-                  textDecoration: 'none',
-                  fontFamily: "'DM Sans', sans-serif", fontSize: 13,
-                  color: pathname === '/espetaculos/rainha-tere' ? COLORS_TERE.yellow : COLORS.gray,
-                }}>→ Festival Rainha Terê</Link>
-                <Link href="/espetaculos/batuque" onClick={() => { setMenuOpen(false); setMobileShowsOpen(false) }} style={{
-                  textDecoration: 'none',
-                  fontFamily: "'DM Sans', sans-serif", fontSize: 13,
-                  color: pathname === '/espetaculos/batuque' ? COLORS_BATUQUE.golden : COLORS.gray,
-                }}>→ Feira Criativa Batuquê</Link>
               </div>
             )}
           </div>
+          <Link href="/espetaculos/rainha-tere" onClick={() => setMenuOpen(false)} style={{
+            textDecoration: 'none',
+            fontFamily: "'DM Sans', sans-serif", fontSize: 14, letterSpacing: 1.5,
+            textTransform: 'uppercase',
+            color: isRainhaActive ? COLORS_TERE.yellow : COLORS.cream,
+          }}>Rainha Terê</Link>
+          <Link href="/espetaculos/batuque" onClick={() => setMenuOpen(false)} style={{
+            textDecoration: 'none',
+            fontFamily: "'DM Sans', sans-serif", fontSize: 14, letterSpacing: 1.5,
+            textTransform: 'uppercase',
+            color: isBatuqueActive ? COLORS_BATUQUE.golden : COLORS.cream,
+          }}>Batuquê</Link>
           {['imprensa', 'blog', 'contato'].map(s => (
             <button key={s} onClick={() => { handleNav(s); setMenuOpen(false) }} style={{
               background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left',
